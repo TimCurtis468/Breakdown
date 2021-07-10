@@ -8,6 +8,7 @@ TagManager:
   - Brick
   - Paddle
   - Ball
+  - Block
   layers:
   - Default
   - TransparentFX
@@ -42,6 +43,30 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 284693655
+    locked: 0
+  - name: Walls
+    uniqueID: 2602532473
+    locked: 0
+  - name: Balls
+    uniqueID: 663767623
+    locked: 0
+  - name: Paddle
+    uniqueID: 4215244193
+    locked: 0
+  - name: Bricks
+    uniqueID: 3861681851
+    locked: 0
+  - name: Endscreen
+    uniqueID: 2491792507
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Title
+    uniqueID: 3361269757
+    locked: 0
+  - name: VV Logo
+    uniqueID: 4277551293
     locked: 0
