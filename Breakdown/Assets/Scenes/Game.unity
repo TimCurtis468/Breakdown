@@ -1230,8 +1230,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2050056234}
+  - component: {fileID: 2050056235}
   m_Layer: 0
-  m_Name: BlocksManager
+  m_Name: BricksManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1251,6 +1252,23 @@ Transform:
   m_Father: {fileID: 896807453}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2050056235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050056233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c41a34987462fa4d84c739dc7a6a3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  brickPrefab: {fileID: 6467981776106359973, guid: 2080f69963fcddf4aaab606254a68c86,
+    type: 3}
+  Sprites:
+  - {fileID: 21300000, guid: 8ac59a019ba165a4995723900ff3daac, type: 3}
+  CurrentLevel: 0
 --- !u!1 &2093282619
 GameObject:
   m_ObjectHideFlags: 0

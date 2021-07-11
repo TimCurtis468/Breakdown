@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
 
     private void OnPaddleHit(Paddle obj, int speed)
     {
-        UpdateScoreText(speed);
+//        UpdateScoreText(speed);
     }
 
     private void OnBlockHit()

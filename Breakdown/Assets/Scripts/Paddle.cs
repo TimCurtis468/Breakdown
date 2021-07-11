@@ -25,8 +25,6 @@ public class Paddle : MonoBehaviour
     private float leftClamp = 0;
     private float rightClamp = 410;
     private float screenEdgeOffset = 0.1f;
-    private float BALL_SPEED_FACTOR = 0.05f;
-    private float MAX_BALL_SPEED = 12.0f;
     private SpriteRenderer sr;
     private BoxCollider2D boxCol;
 
@@ -66,27 +64,13 @@ public class Paddle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        float speed;
         float vel_x;
-        float vel_y;
 
         if (coll.gameObject.tag == "Ball")
         {
             Rigidbody2D ballRb = coll.gameObject.GetComponent<Rigidbody2D>();
             Vector3 hitPoint = coll.contacts[0].point;
             Vector3 paddleCentre = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
-
-            /* Get speed from x,y velocity */
-            speed = Mathf.Sqrt((ballRb.velocity.x * ballRb.velocity.x) + (ballRb.velocity.y * ballRb.velocity.y));
-            /* Limit speed to max value */
-            if (speed < MAX_BALL_SPEED)
-            {
-                speed += BALL_SPEED_FACTOR;
-            }
-            else
-            {
-                speed = MAX_BALL_SPEED;
-            }
 
             float difference = paddleCentre.x - hitPoint.x;
 
@@ -99,11 +83,9 @@ public class Paddle : MonoBehaviour
             {
                 vel_x = Mathf.Abs(difference * 200);
             }
-            /* Modify Y to keep speed constant (plus a bit added each time) */
-            vel_y = Mathf.Sqrt(Mathf.Abs((vel_x * vel_x) - (speed * speed)));   // ABS it to stop errors when getting -ve number */
-            ballRb.AddForce(new Vector2(vel_x, vel_y));
+            ballRb.AddForce(new Vector2(vel_x, 0));
 
-            OnPaddleHit?.Invoke(this, (int)speed);
+            OnPaddleHit?.Invoke(this, 0);
         }
 #if (PI)
         else if (coll.gameObject.tag == "Heart")
