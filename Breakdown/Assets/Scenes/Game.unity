@@ -394,7 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 2314734337305052108, guid: c6403d0008b85c7479a479cad3a92c41,
     type: 3}
-  initialBallSpeed: 250
+  initialBallSpeed: 150
   numBalls: 1
 --- !u!1 &499190163
 GameObject:
@@ -1267,8 +1267,8 @@ MonoBehaviour:
   brickPrefab: {fileID: 6467981776106359973, guid: 2080f69963fcddf4aaab606254a68c86,
     type: 3}
   Sprites:
-  - {fileID: 21300000, guid: 8ac59a019ba165a4995723900ff3daac, type: 3}
-  CurrentLevel: 0
+  - {fileID: 21300000, guid: 76049d207af012b4ea28204b1a2220b4, type: 3}
+  levelNum: 0
 --- !u!1 &2093282619
 GameObject:
   m_ObjectHideFlags: 0

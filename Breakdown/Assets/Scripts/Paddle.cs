@@ -83,7 +83,7 @@ public class Paddle : MonoBehaviour
             {
                 vel_x = Mathf.Abs(difference * 200);
             }
-            ballRb.AddForce(new Vector2(vel_x, 0));
+            ballRb.AddForce(new Vector2(vel_x, 0.7f));
 
             OnPaddleHit?.Invoke(this, 0);
         }

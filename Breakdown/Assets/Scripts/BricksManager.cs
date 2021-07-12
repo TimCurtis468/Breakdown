@@ -27,9 +27,10 @@ public class BricksManager : MonoBehaviour
 
     private int numRows = 16;
     private int numCols = 16;
-    private float initialBrickSpawnPositionX = -1.96f;
+    private float initialBrickSpawnPositionX = -2.45f;
     private float initialBrickSpawnPositionY = 3.125f;
-    private float shiftAmount = 0.365f;
+    private float xshiftAmount = 0.3285f;
+    private float yshiftAmount = 0.2f;
 
     private GameObject bricksContainer;
 
@@ -40,7 +41,7 @@ public class BricksManager : MonoBehaviour
     public List<Brick> RemainingBricks { get; set; }
 
     private List<Level> levels;
-    public int CurrentLevel;
+    public int levelNum = 0;
 
     public int InitialBricksCount { get; set; }
 
@@ -50,25 +51,26 @@ public class BricksManager : MonoBehaviour
         levels = new List<Level>();
         LoadLevelsData();
         this.GenerateBricks();
+        levelNum = 0;
     }
 
     public void LoadNextLevel()
     {
-        this.CurrentLevel++;
+        this.levelNum++;
 
-        if (this.CurrentLevel >= this.levels.Count)
+        if (this.levelNum >= this.levels.Count)
         {
 //            GameManager.Instance.ShowVictoryScreen();
         }
         else
         {
-            this.LoadLevel(this.CurrentLevel);
+            this.LoadLevel(this.levelNum);
         }
     }
 
     public void LoadLevel(int level)
     {
-        this.CurrentLevel = level;
+        this.levelNum = level;
         this.ClearRemainingBricks();
         this.GenerateBricks();
     }
@@ -84,7 +86,7 @@ public class BricksManager : MonoBehaviour
     private void GenerateBricks()
     {
         this.RemainingBricks = new List<Brick>();
-        Level currentLevel = levels[this.CurrentLevel];
+        Level currentLevel = levels[this.levelNum];
         float currentSpawnX = initialBrickSpawnPositionX;
         float currentSpawnY = initialBrickSpawnPositionY;
         float zShift = 0;
@@ -103,14 +105,14 @@ public class BricksManager : MonoBehaviour
                     zShift += 0.0001f;
                 }
 
-                currentSpawnX += shiftAmount;
+                currentSpawnX += xshiftAmount;
                 if (col + 1 >= this.numCols)
                 {
                     currentSpawnX = initialBrickSpawnPositionX;
                 }
             }
 
-            currentSpawnY -= shiftAmount;
+            currentSpawnY -= yshiftAmount;
             zShift = ((row + 1) * 0.0005f);
         }
 
@@ -125,12 +127,12 @@ public class BricksManager : MonoBehaviour
 
         string[] levelsFile = text.text.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
-        Level currentLevel = new Level();
         int currentRow = 0;
         int numLevels = 0;
 
         while (currentRow < levelsFile.Length)
         {
+            Level currentLevel = new Level();
             /* Load hits table for this level */
             for (int x = 0; x < numRows; x++)
             {
@@ -149,7 +151,7 @@ public class BricksManager : MonoBehaviour
             currentRow++;
 
             /* Load colours table for this level */
-            for (int x = 0; x < numRows; x++)
+            for (int x = 0; x < numRows; x++) 
             {
                 string line = levelsFile[currentRow];
                 string[] colours = line.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
