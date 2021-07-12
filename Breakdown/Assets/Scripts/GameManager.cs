@@ -63,8 +63,10 @@ public class GameManager : MonoBehaviour
 
         this.Lives = AvailableLives;
         Ball.OnBallDeath += OnBallDeath;
-//        Heart.OnHeartCatch += OnHeartCatch;
-//        Heart.OnHeartDeath += OnHeartDeath;
+        Brick.OnBrickDesctruction += OnBrickDestruction;
+
+        //        Heart.OnHeartCatch += OnHeartCatch;
+        //        Heart.OnHeartDeath += OnHeartDeath;
 
         /* Set position of walls to match screen resolution */
         mainCamera = FindObjectOfType<Camera>();
@@ -146,10 +148,22 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         Ball.OnBallDeath -= OnBallDeath;
+        Brick.OnBrickDesctruction -= OnBrickDestruction;
+
 #if (PI)
         Heart.OnHeartCatch -= OnHeartCatch;
         Heart.OnHeartDeath -= OnHeartDeath;
 #endif
+    }
+
+    private void OnBrickDestruction(Brick obj)
+    {
+        if (BricksManager.Instance.RemainingBricks.Count <= 0)
+        {
+            BallsManager.Instance.ResetBalls();
+            GameManager.Instance.IsGameStarted = false;
+            BricksManager.Instance.LoadNextLevel();
+        }
     }
 
     private void ResizeSpriteRendered(GameObject gameObject)
