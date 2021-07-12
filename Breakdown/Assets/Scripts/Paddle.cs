@@ -43,8 +43,8 @@ public class Paddle : MonoBehaviour
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
         objectWidth = sr.bounds.extents.x; //extents = size of width / 2
 
-        leftClamp = -screenBounds.x + (objectWidth + screenEdgeOffset);
-        rightClamp = screenBounds.x - (objectWidth + screenEdgeOffset);
+        leftClamp = -screenBounds.x + (objectWidth + screenEdgeOffset) + screenEdgeOffset;
+        rightClamp = screenBounds.x - objectWidth;
     }
 
     // Update is called once per frame
@@ -64,26 +64,24 @@ public class Paddle : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        float vel_x;
-
         if (coll.gameObject.tag == "Ball")
         {
             Rigidbody2D ballRb = coll.gameObject.GetComponent<Rigidbody2D>();
             Vector3 hitPoint = coll.contacts[0].point;
             Vector3 paddleCentre = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
 
+            ballRb.velocity = Vector2.zero;
+
             float difference = paddleCentre.x - hitPoint.x;
 
-            /* Calculate X and Y velocities by using position of collision on paddle for X */
             if (hitPoint.x < paddleCentre.x)
             {
-                vel_x = -(Mathf.Abs(difference * 200));
+                ballRb.AddForce(new Vector2(-(Mathf.Abs(difference * 200)), BallsManager.Instance.initialBallSpeed * 2.0f));
             }
             else
             {
-                vel_x = Mathf.Abs(difference * 200);
+                ballRb.AddForce(new Vector2(Mathf.Abs(difference * 200), BallsManager.Instance.initialBallSpeed * 2.0f));
             }
-            ballRb.AddForce(new Vector2(vel_x,0.0f));
 
             OnPaddleHit?.Invoke(this, 0);
         }

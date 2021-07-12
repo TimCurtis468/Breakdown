@@ -30,7 +30,7 @@ public class BricksManager : MonoBehaviour
     private float initialBrickSpawnPositionX = -2.45f;
     private float initialBrickSpawnPositionY = 3.125f;
     private float xshiftAmount = 0.3285f;
-    private float yshiftAmount = 0.2f;
+    private float yshiftAmount = 0.27f;
 
     private GameObject bricksContainer;
 

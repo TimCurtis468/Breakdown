@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
 //        GameManager.OnLifeGained += OnLifeGained;
         Paddle.OnPaddleHit += OnPaddleHit;
         BricksManager.OnLevelComplete += OnLevelComplete;
+        Brick.OnBrickDistruction += OnBrickDistruction;
         //        Block.OnBlockHit += OnBlockHit;
         UpdateScoreText(0);
     }
@@ -56,6 +57,11 @@ public class UIManager : MonoBehaviour
         string txt = "LIVES: " + remainingLives.ToString();
         LivesText.text = txt;
     }
+    private void OnBrickDistruction(Brick obj)
+    {
+        UpdateScoreText(10);
+    }
+
 
     private void UpdateScoreText(int increment)
     {

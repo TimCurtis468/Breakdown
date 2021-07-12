@@ -62,22 +62,22 @@ public class BallsManager : MonoBehaviour
 
         if (!GameManager.Instance.IsGameStarted)
         {
+            Vector3 paddlePosition = Paddle.Instance.gameObject.transform.position;
+            Vector3 ballPosition = new Vector3(paddlePosition.x, paddlePosition.y + 0.27f, 0);
+            Balls[0].transform.position = ballPosition;
+
             if (Input.GetMouseButtonDown(0))
             {
-                for (int i = 0; i < Balls.Count; i++) 
+                float x_speed = UnityEngine.Random.Range(50.0f, 100.0f);
+                float y_speed = UnityEngine.Random.Range(250.0f, 450.0f);
+                int direction = UnityEngine.Random.Range(1, 3);
+                if (direction == 1)
                 {
-
-                    float x_speed = UnityEngine.Random.Range(50.0f, 100.0f);
-                    float y_speed = UnityEngine.Random.Range(250.0f, 450.0f);
-                    int direction = UnityEngine.Random.Range(1, 3);
-                    if (direction == 1)
-                    {
-                        x_speed = -x_speed;
-                    }
-
-                    BallRbs[i].isKinematic = false;
-                    BallRbs[i].AddForce(new Vector2(x_speed, y_speed));
+                    x_speed = -x_speed;
                 }
+
+                BallRbs[0].isKinematic = false;
+                BallRbs[0].AddForce(new Vector2(x_speed, y_speed));
                 GameManager.Instance.IsGameStarted = true;
             }
         }
@@ -118,7 +118,6 @@ public class BallsManager : MonoBehaviour
 
     private void InitBall()
     {
-        Ball newBall;
         Rigidbody2D newBallRb;
 //        Heart newHeart;
 
@@ -127,15 +126,15 @@ public class BallsManager : MonoBehaviour
         Balls.Clear();
         BallRbs.Clear();
 
-        for (int i = 0; i < numBalls; i++)
-        {
-            Vector3 startingPosition = new Vector3((i - 1) * numBalls, -screenBounds.y / 2, 0);
-            newBall = Instantiate(ballPrefab, startingPosition, Quaternion.identity);
-            newBallRb = newBall.GetComponent<Rigidbody2D>();
 
-            Balls.Add(newBall);
-            BallRbs.Add(newBallRb);
-        }
+        Vector3 paddlePosition = Paddle.Instance.gameObject.transform.position;
+        Vector3 startingPosition = new Vector3(paddlePosition.x, paddlePosition.y + 0.27f, 0);
+        initialBall = Instantiate(ballPrefab, startingPosition, Quaternion.identity);
+        newBallRb = initialBall.GetComponent<Rigidbody2D>();
+
+        Balls.Add(initialBall);
+        BallRbs.Add(newBallRb);
+
 
 //        Vector3 heartPosition = new Vector3(0.8f, -screenBounds.y / 2, 0);
 //        newHeart = Instantiate(heartPrefab, heartPosition, Quaternion.identity);

@@ -11,7 +11,7 @@ public class Brick : MonoBehaviour
     public int HitPoints = 1;
     public ParticleSystem DestroyEffect;
 
-    public static event Action<Brick> OnBrickDesctruction;
+    public static event Action<Brick> OnBrickDistruction;
 
     private void Awake()
     {
@@ -80,7 +80,7 @@ public class Brick : MonoBehaviour
         if ((this.HitPoints <= 0) || (instantKill == true))
         {
             BricksManager.Instance.RemainingBricks.Remove(this);
-            OnBrickDesctruction?.Invoke(this);
+            OnBrickDistruction?.Invoke(this);
 //            OnBrickDestructionBuffs();
             SpawnDestroyEffect();
             Destroy(this.gameObject);

@@ -661,10 +661,9 @@ GameObject:
   - component: {fileID: 960416251}
   - component: {fileID: 960416252}
   - component: {fileID: 960416250}
-  - component: {fileID: 960416253}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -694,7 +693,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 2.7437718, y: 0.005064249}
@@ -746,7 +745,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -2.705916, y: 0.002005577}
@@ -762,18 +761,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.20966625, y: 10.10009}
   m_EdgeRadius: 0
---- !u!114 &960416253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 960416248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25ebba603214d5a4cab340d86b48b462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1070314265
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,18 +980,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.100803494, y: 0.08158159}
+  m_Offset: {x: -0.093509674, y: 0.04919529}
   m_SpriteTilingProperty:
     border: {x: 0.22, y: 0, z: 0.39999998, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 2.15, y: 0.46}
-    newSize: {x: 1.2506325, y: 0.2675772}
+    newSize: {x: 1.2241488, y: 0.41323856}
     adaptiveTilingThreshold: 0.5
     drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.9483931, y: 0.25451025}
+  m_Size: {x: 1.0487788, y: 0.13791847}
   m_EdgeRadius: 0
 --- !u!212 &1770376674
 SpriteRenderer:
@@ -1052,7 +1039,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 1.2506325, y: 0.2675772}
+  m_Size: {x: 1.2241488, y: 0.41323856}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1066,7 +1053,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1770376671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.08, y: -4.8162, z: 0}
+  m_LocalPosition: {x: 0.0668, y: -4.7434, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

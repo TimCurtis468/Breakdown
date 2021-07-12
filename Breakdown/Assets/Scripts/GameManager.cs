@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
         this.Lives = AvailableLives;
         Ball.OnBallDeath += OnBallDeath;
-        Brick.OnBrickDesctruction += OnBrickDestruction;
+        Brick.OnBrickDistruction += OnBrickDestruction;
 
         //        Heart.OnHeartCatch += OnHeartCatch;
         //        Heart.OnHeartDeath += OnHeartDeath;
@@ -148,7 +148,7 @@ public class GameManager : MonoBehaviour
     private void OnDisable()
     {
         Ball.OnBallDeath -= OnBallDeath;
-        Brick.OnBrickDesctruction -= OnBrickDestruction;
+        Brick.OnBrickDistruction -= OnBrickDestruction;
 
 #if (PI)
         Heart.OnHeartCatch -= OnHeartCatch;
