@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     public bool IsGameStarted { get; set; }
 
     public static event Action<int> OnLifeLost;
-    public static event Action<int> OnLifeGained;
+//    public static event Action<int> OnLifeGained;
 
 #if (PI)
     public GameObject LeftWall;

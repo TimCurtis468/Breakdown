@@ -19,8 +19,9 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         GameManager.OnLifeLost += OnLifeLost;
-        GameManager.OnLifeGained += OnLifeGained;
+//        GameManager.OnLifeGained += OnLifeGained;
         Paddle.OnPaddleHit += OnPaddleHit;
+        BricksManager.OnLevelComplete += OnLevelComplete;
         //        Block.OnBlockHit += OnBlockHit;
         UpdateScoreText(0);
     }
@@ -34,13 +35,18 @@ public class UIManager : MonoBehaviour
 
     private void OnLifeLost(int remainingLives)
     {
-        int background_num = 0;
+
         string txt = "LIVES: " + remainingLives.ToString();
         LivesText.text = txt;
 
-        if (backgrounds.Length > 0)
+
+    }
+
+    private void OnLevelComplete()
+    {
+         if (backgrounds.Length > 0)
         {
-            background_num = UnityEngine.Random.Range(0, backgrounds.Length);
+            int background_num = UnityEngine.Random.Range(0, backgrounds.Length);
             spriteRenderer.sprite = backgrounds[background_num];
         }
     }
@@ -73,8 +79,10 @@ public class UIManager : MonoBehaviour
     {
         GameManager.OnLifeLost -= OnLifeLost;
         Paddle.OnPaddleHit -= OnPaddleHit;
-        GameManager.OnLifeGained -= OnLifeGained;
-//        Block.OnBlockHit -= OnBlockHit;
+        BricksManager.OnLevelComplete -= OnLevelComplete;
+
+        //        GameManager.OnLifeGained -= OnLifeGained;
+        //        Block.OnBlockHit -= OnBlockHit;
     }
 
 }

@@ -34,6 +34,9 @@ public class BricksManager : MonoBehaviour
 
     private GameObject bricksContainer;
 
+    public static event Action OnLevelComplete;
+
+
     public Brick brickPrefab;
 
     public Sprite[] Sprites;
@@ -72,6 +75,7 @@ public class BricksManager : MonoBehaviour
     {
         this.levelNum = level;
         this.ClearRemainingBricks();
+        OnLevelComplete?.Invoke();
         this.GenerateBricks();
     }
 
