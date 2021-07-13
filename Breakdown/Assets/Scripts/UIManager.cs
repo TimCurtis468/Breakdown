@@ -76,9 +76,9 @@ public class UIManager : MonoBehaviour
 //        UpdateScoreText(speed);
     }
 
-    private void OnBlockHit()
+    private void OnBlockHit(int increment)
     {
-        UpdateScoreText(1);
+        UpdateScoreText(increment);
     }
 
     private void OnDisable()

@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
             if (this.Lives < 1)
             {
                 BallsManager.Instance.DestroyBalls();
-//                EndScreen.score = endScore;
+                EndScreen.score = endScore;
                 SceneManager.LoadScene("GameOver");
             }
             else

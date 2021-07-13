@@ -76,6 +76,7 @@ public class Brick : MonoBehaviour
 
     private void TakeDamage(bool instantKill)
     {
+        // TODO: Add hitpoints to score here - use OnBlockHit(HisPoints);
         this.HitPoints--;
 
         if ((this.HitPoints <= 0) || (instantKill == true))
@@ -88,7 +89,7 @@ public class Brick : MonoBehaviour
         }
         else
         {
-            this.sr.sprite = BricksManager.Instance.Sprites[this.HitPoints - 1];
+//            this.sr.sprite = BricksManager.Instance.Sprites[this.HitPoints - 1];
         }
     }
 #if (PI)

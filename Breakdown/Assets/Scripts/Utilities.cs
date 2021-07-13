@@ -135,7 +135,7 @@ public class Utilities : MonoBehaviour
     static public void ResizeText(GameObject gameObject)
     {
         Text t = gameObject.GetComponent<Text>();
-        t.fontSize = (t.fontSize * Screen.width) / 1920;
+        t.fontSize = (t.fontSize * Screen.width) / 1080;
     }
 
     static public void ResizeSpriteToFullScreen(GameObject gameObject)

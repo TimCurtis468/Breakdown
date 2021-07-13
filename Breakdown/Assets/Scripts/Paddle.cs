@@ -35,6 +35,8 @@ public class Paddle : MonoBehaviour
 
     void Start()
     {
+        screenEdgeOffset = Utilities.ResizeXValue(0.2f); 
+
         mainCamera = FindObjectOfType<Camera>();
         paddleInitialY = transform.position.y;
         sr = GetComponent<SpriteRenderer>();
@@ -43,8 +45,8 @@ public class Paddle : MonoBehaviour
         screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
         objectWidth = sr.bounds.extents.x; //extents = size of width / 2
 
-        leftClamp = -screenBounds.x + (objectWidth + screenEdgeOffset) + screenEdgeOffset;
-        rightClamp = screenBounds.x - objectWidth;
+        leftClamp = -screenBounds.x + objectWidth + screenEdgeOffset;
+        rightClamp = screenBounds.x - objectWidth;// - screenEdgeOffset;
 
         Utilities.ResizeSprite(this.gameObject);
     }
