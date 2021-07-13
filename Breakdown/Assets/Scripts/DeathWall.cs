@@ -4,6 +4,19 @@ using UnityEngine;
 
 public class DeathWall : MonoBehaviour
 {
+    public GameObject deathWall;
+
+    private void Start()
+    {
+        GameObject obj;
+        Transform trans;
+        Transform childTrans;
+
+        trans = deathWall.transform;
+        childTrans = trans.Find("Graphics");
+        obj = childTrans.gameObject;
+        Utilities.ResizeSpriteToFullScreen(obj);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Ball")

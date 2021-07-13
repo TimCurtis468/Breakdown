@@ -32,34 +32,20 @@ public class GameManager : MonoBehaviour
     public static event Action<int> OnLifeLost;
 //    public static event Action<int> OnLifeGained;
 
-#if (PI)
-    public GameObject LeftWall;
-    public GameObject RightWall;
-#endif
-    public GameObject background;
 
-    private Vector2 screenBounds;
-    private Camera mainCamera;
+    public GameObject background;
+    public GameObject walls;
 
     private int endScore = 0;
-
-
-    private float widthFactor;
-    private float heightFactor;
 
     public AudioClip heartCatch;
     private AudioSource audioSource;
 
     private void Start()
     {
-//        float objectWidth;
-
         GameObject obj;
         Transform trans;
         Transform childTrans;
-
-        widthFactor = Screen.width / 1080.0f;
-        heightFactor = Screen.height / 1920.0f;
 
         this.Lives = AvailableLives;
         Ball.OnBallDeath += OnBallDeath;
@@ -68,21 +54,16 @@ public class GameManager : MonoBehaviour
         //        Heart.OnHeartCatch += OnHeartCatch;
         //        Heart.OnHeartDeath += OnHeartDeath;
 
-        /* Set position of walls to match screen resolution */
-        mainCamera = FindObjectOfType<Camera>();
-        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
-#if (PI)
-        objectWidth = RightWall.GetComponent<SpriteRenderer>().bounds.extents.x;
-        RightWall.transform.position = new Vector3(screenBounds.x + (objectWidth / 2), RightWall.transform.position.y, RightWall.transform.position.z);
-
-        objectWidth = LeftWall.GetComponent<SpriteRenderer>().bounds.extents.x;
-        LeftWall.transform.position = new Vector3(-(screenBounds.x + (objectWidth / 2)), LeftWall.transform.position.y, LeftWall.transform.position.z);
-#endif
-        // Graphics text
+        // Set background and walls sizes
         trans = background.transform;
         childTrans = trans.Find("Graphics"); 
         obj = childTrans.gameObject;
-        ResizeSpriteRendered(obj);
+        Utilities.ResizeSpriteToFullScreen(obj);
+
+        trans = walls.transform;
+        childTrans = trans.Find("Graphics");
+        obj = childTrans.gameObject;
+        Utilities.ResizeSpriteToFullScreen(obj);
 
         audioSource = GetComponentInChildren<AudioSource>();
     }
@@ -165,22 +146,19 @@ public class GameManager : MonoBehaviour
             BricksManager.Instance.LoadNextLevel();
         }
     }
-
+#if (PI)
     private void ResizeSpriteRendered(GameObject gameObject)
     {
-        float objectWidth;
-        float objectHeight;
-        SpriteRenderer sr;
+        var topRightCorner = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        var worldSpaceWidth = topRightCorner.x * 2;
+        var worldSpaceHeight = topRightCorner.y * 2;
+        var spriteSize = gameObject.GetComponent<SpriteRenderer>().bounds.size;
+        var scaleFactorX = worldSpaceWidth / spriteSize.x;
+        var scaleFactorY = worldSpaceHeight / spriteSize.y;
 
-        sr = gameObject.GetComponent<SpriteRenderer>();
-        objectWidth = sr.transform.localScale.x;
-        objectHeight = sr.transform.localScale.y;
-
-        objectWidth = objectWidth * widthFactor;
-        objectHeight = objectHeight * heightFactor;
-
-        sr.transform.localScale = new Vector2(objectWidth, objectHeight);
+        gameObject.transform.localScale = new Vector3(scaleFactorX, scaleFactorY, 1);
     }
+#endif
 }
 
 

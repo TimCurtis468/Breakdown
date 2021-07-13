@@ -19,6 +19,7 @@ public class Ball : MonoBehaviour
     {
         this.sr = GetComponentInChildren<SpriteRenderer>();
         audioSource = GetComponentInChildren<AudioSource>();
+        Utilities.ResizeSprite(this.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D coll)

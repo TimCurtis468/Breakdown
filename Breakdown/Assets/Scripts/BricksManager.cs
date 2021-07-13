@@ -91,8 +91,8 @@ public class BricksManager : MonoBehaviour
     {
         this.RemainingBricks = new List<Brick>();
         Level currentLevel = levels[this.levelNum];
-        float currentSpawnX = initialBrickSpawnPositionX;
-        float currentSpawnY = initialBrickSpawnPositionY;
+        float currentSpawnX = Utilities.ResizeXValue(initialBrickSpawnPositionX);
+        float currentSpawnY = Utilities.ResizeYValue(initialBrickSpawnPositionY);
         float zShift = 0;
 
         for (int row = 0; row < this.numRows; row++)
@@ -105,18 +105,20 @@ public class BricksManager : MonoBehaviour
                     Brick newBrick = Instantiate(brickPrefab, new Vector3(currentSpawnX, currentSpawnY, 0 - zShift), Quaternion.identity) as Brick;
                     newBrick.Init(bricksContainer.transform, this.Sprites[0], GetColour(currentLevel.colours[row,col]), currentLevel.hits[row,col]);
 
+                    Utilities.ResizeSprite(newBrick.gameObject);
+
                     this.RemainingBricks.Add(newBrick);
                     zShift += 0.0001f;
                 }
 
-                currentSpawnX += xshiftAmount;
+                currentSpawnX += Utilities.ResizeXValue(xshiftAmount);
                 if (col + 1 >= this.numCols)
                 {
-                    currentSpawnX = initialBrickSpawnPositionX;
+                    currentSpawnX = Utilities.ResizeXValue(initialBrickSpawnPositionX);
                 }
             }
 
-            currentSpawnY -= yshiftAmount;
+            currentSpawnY -= Utilities.ResizeYValue(yshiftAmount);
             zShift = ((row + 1) * 0.0005f);
         }
 

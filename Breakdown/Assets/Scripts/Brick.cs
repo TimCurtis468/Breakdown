@@ -17,6 +17,7 @@ public class Brick : MonoBehaviour
     {
         this.sr = this.GetComponent<SpriteRenderer>();
         this.boxCol = this.GetComponent<BoxCollider2D>();
+
 //        Ball.OnLightningBallEnable += OnLightningBallEnable;
 //        Ball.OnLightningBallDisable += OnLightningBallDisable;
     }

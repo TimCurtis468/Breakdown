@@ -45,6 +45,8 @@ public class Paddle : MonoBehaviour
 
         leftClamp = -screenBounds.x + (objectWidth + screenEdgeOffset) + screenEdgeOffset;
         rightClamp = screenBounds.x - objectWidth;
+
+        Utilities.ResizeSprite(this.gameObject);
     }
 
     // Update is called once per frame
