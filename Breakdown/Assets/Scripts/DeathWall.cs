@@ -8,14 +8,7 @@ public class DeathWall : MonoBehaviour
 
     private void Start()
     {
-        GameObject obj;
-        Transform trans;
-        Transform childTrans;
-
-        trans = deathWall.transform;
-        childTrans = trans.Find("Graphics");
-        obj = childTrans.gameObject;
-        Utilities.ResizeSpriteToFullScreen(obj);
+        Utilities.ResizeAndPositionSprite(this.gameObject);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

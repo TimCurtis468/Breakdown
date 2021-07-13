@@ -34,7 +34,9 @@ public class GameManager : MonoBehaviour
 
 
     public GameObject background;
-    public GameObject walls;
+    public GameObject leftWall;
+    public GameObject topWall;
+    public GameObject rightWall;
 
     private int endScore = 0;
 
@@ -60,10 +62,9 @@ public class GameManager : MonoBehaviour
         obj = childTrans.gameObject;
         Utilities.ResizeSpriteToFullScreen(obj);
 
-        trans = walls.transform;
-        childTrans = trans.Find("Graphics");
-        obj = childTrans.gameObject;
-        Utilities.ResizeSpriteToFullScreen(obj);
+        Utilities.ResizeAndPositionSprite(leftWall.gameObject);
+        Utilities.ResizeAndPositionSprite(topWall.gameObject);
+        Utilities.ResizeAndPositionSprite(rightWall.gameObject);
 
         audioSource = GetComponentInChildren<AudioSource>();
     }
