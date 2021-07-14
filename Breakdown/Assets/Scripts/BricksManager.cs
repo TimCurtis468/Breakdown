@@ -185,7 +185,7 @@ public class BricksManager : MonoBehaviour
         int g = (intColour >> 8) & 0xFF;
         int b = intColour & 0xFF;
 
-        Color color = new Color(r, g, b);
+        Color color = new Color(r/255.0f, g/255.0f, b/255.0f);
 
         return color;
     }
