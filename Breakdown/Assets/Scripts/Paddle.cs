@@ -24,29 +24,35 @@ public class Paddle : MonoBehaviour
     private float paddleInitialY;
     private float leftClamp = 0;
     private float rightClamp = 410;
-    private float screenEdgeOffset = 0.1f;
+    private float screenEdgeOffset = 0.15f;
     private SpriteRenderer sr;
     private BoxCollider2D boxCol;
 
-    private Vector2 screenBounds;
+    private float paddleCentreOffset = 0.1f;
+
     private float objectWidth;
 
     public static event Action<Paddle, int> OnPaddleHit;
 
     void Start()
     {
-        screenEdgeOffset = Utilities.ResizeXValue(0.2f); 
+        screenEdgeOffset = Utilities.ResizeXValue(screenEdgeOffset);
+        paddleCentreOffset = Utilities.ResizeXValue(paddleCentreOffset);
 
         mainCamera = FindObjectOfType<Camera>();
         paddleInitialY = transform.position.y;
         sr = GetComponent<SpriteRenderer>();
         boxCol = GetComponent<BoxCollider2D>();
 
-        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
-        objectWidth = sr.bounds.extents.x; //extents = size of width / 2
+        objectWidth = boxCol.bounds.extents.x;
+        objectWidth = Utilities.ResizeXValue(objectWidth);
 
-        leftClamp = -screenBounds.x + objectWidth + screenEdgeOffset;
-        rightClamp = screenBounds.x - objectWidth;// - screenEdgeOffset;
+        Utilities.ResizeXValue(objectWidth);
+
+        var topRightCorner = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+
+        leftClamp = -topRightCorner.x + objectWidth + screenEdgeOffset + paddleCentreOffset;
+        rightClamp = topRightCorner.x - objectWidth - screenEdgeOffset + paddleCentreOffset;
 
         Utilities.ResizeSprite(this.gameObject);
     }
@@ -72,7 +78,7 @@ public class Paddle : MonoBehaviour
         {
             Rigidbody2D ballRb = coll.gameObject.GetComponent<Rigidbody2D>();
             Vector3 hitPoint = coll.contacts[0].point;
-            Vector3 paddleCentre = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y);
+            Vector3 paddleCentre = new Vector3(this.gameObject.transform.position.x - paddleCentreOffset, this.gameObject.transform.position.y);
 
             ballRb.velocity = Vector2.zero;
 
