@@ -25,12 +25,12 @@ public class BricksManager : MonoBehaviour
     }
     #endregion
 
-    private int numRows = 16;
-    private int numCols = 16;
-    private float initialBrickSpawnPositionX = -2.45f;
+    private int numRows = 12;
+    private int numCols = 10;
+    private float initialBrickSpawnPositionX = -2.35f;
     private float initialBrickSpawnPositionY = 3.125f;
-    private float xshiftAmount = 0.3285f;
-    private float yshiftAmount = 0.27f;
+    private float xshiftAmount = 0.5285f;
+    private float yshiftAmount = 0.42f;
 
     private GameObject bricksContainer;
 
@@ -99,11 +99,11 @@ public class BricksManager : MonoBehaviour
         {
             for (int col = 0; col < this.numCols; col++)
             {
-                int brickHits = currentLevel.hits[row,col];
+                int brickHits = currentLevel.hits[col,row];
                 if (brickHits > 0)
                 {
                     Brick newBrick = Instantiate(brickPrefab, new Vector3(currentSpawnX, currentSpawnY, 0 - zShift), Quaternion.identity) as Brick;
-                    newBrick.Init(bricksContainer.transform, this.Sprites[0], GetColour(currentLevel.colours[row,col]), currentLevel.hits[row,col]);
+                    newBrick.Init(bricksContainer.transform, this.Sprites[0], GetColour(currentLevel.colours[col, row]), currentLevel.hits[col, row]);
 
                     Utilities.ResizeSprite(newBrick.gameObject);
 
@@ -140,14 +140,14 @@ public class BricksManager : MonoBehaviour
         {
             Level currentLevel = new Level();
             /* Load hits table for this level */
-            for (int x = 0; x < numRows; x++)
+            for (int y = 0; y < numRows; y++)
             {
                 string line = levelsFile[currentRow];
                 string[] hits = line.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                for (int y = 0; y < numCols; y++)
+                for (int x = 0; x < numCols; x++)
                 {
-                    currentLevel.hits[x, y] = int.Parse(hits[y]);
+                    currentLevel.hits[x, y] = int.Parse(hits[x]);
                 }
 
                 currentRow++;
@@ -157,14 +157,14 @@ public class BricksManager : MonoBehaviour
             currentRow++;
 
             /* Load colours table for this level */
-            for (int x = 0; x < numRows; x++) 
+            for (int y = 0; y < numRows; y++) 
             {
                 string line = levelsFile[currentRow];
                 string[] colours = line.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                for (int y = 0; y < numCols; y++)
+                for (int x = 0; x < numCols; x++)
                 {
-                    currentLevel.colours[x, y] = int.Parse(colours[y], System.Globalization.NumberStyles.HexNumber);
+                    currentLevel.colours[x, y] = int.Parse(colours[x], System.Globalization.NumberStyles.HexNumber);
                 }
 
                 currentRow++;
@@ -192,8 +192,8 @@ public class BricksManager : MonoBehaviour
 
     private class Level
     {
-        public int[,] hits = new int[16, 16];
-        public int[,] colours = new int[16, 16];
+        public int[,] hits = new int[10, 12];
+        public int[,] colours = new int[10, 12];
     }
 }
 
