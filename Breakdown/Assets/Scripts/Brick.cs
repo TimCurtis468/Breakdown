@@ -12,6 +12,7 @@ public class Brick : MonoBehaviour
     public ParticleSystem DestroyEffect;
 
     public static event Action<Brick> OnBrickDistruction;
+    public static event Action<Brick, int> OnBrickHit;
 
     private void Awake()
     {
@@ -76,7 +77,12 @@ public class Brick : MonoBehaviour
 
     private void TakeDamage(bool instantKill)
     {
-        // TODO: Add hitpoints to score here - use OnBlockHit(HisPoints);
+        if( HitPoints > 1)
+        {
+            OnBrickHit?.Invoke(this, HitPoints);
+        }
+        // Add hitpoints to score
+
         this.HitPoints--;
 
         if ((this.HitPoints <= 0) || (instantKill == true))

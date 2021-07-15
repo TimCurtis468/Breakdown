@@ -18,14 +18,15 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        //        GameManager.OnLifeGained += OnLifeGained;
         GameManager.OnLifeLost += OnLifeLost;
-//        GameManager.OnLifeGained += OnLifeGained;
         Paddle.OnPaddleHit += OnPaddleHit;
         BricksManager.OnLevelComplete += OnLevelComplete;
         Brick.OnBrickDistruction += OnBrickDistruction;
-        //        Block.OnBlockHit += OnBlockHit;
+        Brick.OnBrickHit += OnBrickHit;
         UpdateScoreText(0);
     }
+
     private void Awake()
     {
         spriteRenderer = background_obj.GetComponent<SpriteRenderer>();
@@ -62,6 +63,11 @@ public class UIManager : MonoBehaviour
         UpdateScoreText(10);
     }
 
+    private void OnBrickHit(Brick obj, int increment)
+    {
+        UpdateScoreText(increment);
+    }
+
 
     private void UpdateScoreText(int increment)
     {
@@ -76,19 +82,17 @@ public class UIManager : MonoBehaviour
 //        UpdateScoreText(speed);
     }
 
-    private void OnBlockHit(int increment)
-    {
-        UpdateScoreText(increment);
-    }
 
     private void OnDisable()
     {
         GameManager.OnLifeLost -= OnLifeLost;
         Paddle.OnPaddleHit -= OnPaddleHit;
         BricksManager.OnLevelComplete -= OnLevelComplete;
+        Brick.OnBrickDistruction -= OnBrickDistruction;
+        Brick.OnBrickHit -= OnBrickHit;
 
         //        GameManager.OnLifeGained -= OnLifeGained;
-        //        Block.OnBlockHit -= OnBlockHit;
+
     }
 
 }
