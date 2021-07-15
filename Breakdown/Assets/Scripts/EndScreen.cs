@@ -18,4 +18,8 @@ public class EndScreen : MonoBehaviour
         Application.Quit();
     }
 
+    public void buySoundtrack()
+    {
+        Application.OpenURL("https://penniesonoureyes.bandcamp.com/album/virtually-vintage-soundtrack");
+    }
 }
