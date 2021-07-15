@@ -12,7 +12,7 @@ public class DeathWall : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Ball")
+        if ((collision.tag == "Ball") && (GameManager.Instance.paused == false))
         {
             Ball ball = collision.GetComponent<Ball>();
             BallsManager.Instance.Balls.Remove(ball);

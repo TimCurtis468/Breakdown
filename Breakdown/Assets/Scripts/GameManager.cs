@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -28,6 +29,8 @@ public class GameManager : MonoBehaviour
     public int Lives { get; set; }
 
     public bool IsGameStarted { get; set; }
+
+    public bool paused = false;
 
     public static event Action<int> OnLifeLost;
 //    public static event Action<int> OnLifeGained;
@@ -67,6 +70,8 @@ public class GameManager : MonoBehaviour
         Utilities.ResizeAndPositionSprite(rightWall.gameObject);
 
         audioSource = GetComponentInChildren<AudioSource>();
+
+        paused = false;
     }
 
     public void SetScore(int score)
@@ -142,24 +147,36 @@ public class GameManager : MonoBehaviour
     {
         if (BricksManager.Instance.RemainingBricks.Count <= 0)
         {
-            BallsManager.Instance.ResetBalls();
-            GameManager.Instance.IsGameStarted = false;
-            BricksManager.Instance.LoadNextLevel();
+            paused = true;
+            // Pause for 1 second 
+            StartPause(1);
         }
     }
-#if (PI)
-    private void ResizeSpriteRendered(GameObject gameObject)
-    {
-        var topRightCorner = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        var worldSpaceWidth = topRightCorner.x * 2;
-        var worldSpaceHeight = topRightCorner.y * 2;
-        var spriteSize = gameObject.GetComponent<SpriteRenderer>().bounds.size;
-        var scaleFactorX = worldSpaceWidth / spriteSize.x;
-        var scaleFactorY = worldSpaceHeight / spriteSize.y;
 
-        gameObject.transform.localScale = new Vector3(scaleFactorX, scaleFactorY, 1);
+    public void StartPause(float pause)
+    {
+        // how many seconds to pause the game
+        StartCoroutine(PauseGame(pause));
     }
-#endif
+    public IEnumerator PauseGame(float pauseTime)
+    {
+//        Time.timeScale = 0f;
+        float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
+        while (Time.realtimeSinceStartup < pauseEndTime)
+        {
+            yield return 0;
+        }
+//Time.timeScale = 1f;
+        PauseEnded();
+    }
+
+    public void PauseEnded()
+    {
+        paused = false;
+        BallsManager.Instance.ResetBalls();
+        GameManager.Instance.IsGameStarted = false;
+        BricksManager.Instance.LoadNextLevel();
+    }
 }
 
 
