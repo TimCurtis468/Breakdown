@@ -83,6 +83,22 @@ public class BallsManager : MonoBehaviour
         }
     }
 
+    public void SpawnBalls(Vector3 position, int count, bool isLightningBall)
+    {
+        for (int i = 0; i < count; i++)
+        {
+            Ball spawnedBall = Instantiate(ballPrefab, position, Quaternion.identity);
+//            if (isLightningBall == true)
+//            {
+//                spawnedBall.StartLightningBall();
+//            }
+            Rigidbody2D spawnedBallRb = spawnedBall.GetComponent<Rigidbody2D>();
+            spawnedBallRb.isKinematic = false;
+            spawnedBallRb.AddForce(new Vector2(i, initialBallSpeed * 2));
+            this.Balls.Add(spawnedBall);
+        }
+    }
+
     public void DestroyBalls()
     {
         foreach (var ball in this.Balls.ToList())

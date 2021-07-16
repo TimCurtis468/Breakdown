@@ -878,10 +878,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3ec87cc50eccafc46aaa09c28146c620, type: 3}
   - {fileID: 21300000, guid: e003c0712ef118e48890a0772ebfd6b0, type: 3}
   - {fileID: 21300000, guid: 0a0ff0d4bcbe62844aa9a759cf1e9a6d, type: 3}
-  - {fileID: 21300000, guid: 8a37aa3d37de61e4db97e543d2a2eece, type: 3}
   - {fileID: 21300000, guid: d6eb9ab5457174f468d39f781eab42b2, type: 3}
-  - {fileID: 21300000, guid: b0e18a46486d8db4e8d301937bf1b50a, type: 3}
-  - {fileID: 21300000, guid: aeb218ddf73627745b6476d2d001a084, type: 3}
   - {fileID: 21300000, guid: 6b8c0fba2041aec4086bff940ce2b689, type: 3}
   - {fileID: 21300000, guid: b20a56844700d644f889b5acffd35dbe, type: 3}
   - {fileID: 21300000, guid: f563a642d9a5bf34b851e13a8a0ae773, type: 3}
@@ -892,6 +889,19 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f8c18cc4506da414b8636ffe6b30efec, type: 3}
   - {fileID: 21300000, guid: 108bb5209e9f4d64d82ef94c6da1fd0b, type: 3}
   - {fileID: 21300000, guid: d643191143182ba4193a59e93e97f7d5, type: 3}
+  - {fileID: 21300000, guid: 824afe94f63af664799cab1ab0ab8e43, type: 3}
+  - {fileID: 21300000, guid: 0626ac68a85cd544fb546c7b7fd22854, type: 3}
+  - {fileID: 21300000, guid: 23349c69682a9734793ac895de09f426, type: 3}
+  - {fileID: 21300000, guid: fcb9e2fdd64390541a34e61a5ed75ebc, type: 3}
+  - {fileID: 21300000, guid: 71dbee603144db44e9c94eb87ee1fef8, type: 3}
+  - {fileID: 21300000, guid: 6a1aed7fe1fe3a74491ec6977337b4bc, type: 3}
+  - {fileID: 21300000, guid: 3b0502b24910e1f4b9a140455441eec3, type: 3}
+  - {fileID: 21300000, guid: d255a5d8935a5bc4f952e27f9c749b25, type: 3}
+  - {fileID: 21300000, guid: 63a110871f1e051499b29e11392035b0, type: 3}
+  - {fileID: 21300000, guid: 7493db2868ca59c40b6def70c1d79167, type: 3}
+  - {fileID: 21300000, guid: bebed5c42148c3c4986a10873d594336, type: 3}
+  - {fileID: 21300000, guid: 9e39d7fe76fd14b458f29539b5941fe8, type: 3}
+  - {fileID: 21300000, guid: 860bbbfafefa59747a137e6944b4f861, type: 3}
   background_obj: {fileID: 1737068994}
 --- !u!1 &960416248
 GameObject:
@@ -1483,8 +1493,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AvailableBuffs:
   - {fileID: 886610185214057142, guid: f23b3c01cefbe70409c48e14defeaa46, type: 3}
+  - {fileID: 5942664546718290914, guid: e33c159ec5bdc424783b5d2f59a8fbb4, type: 3}
   AvailableDebuffs: []
-  BuffChance: 2
+  BuffChance: 3.9
   DebuffChance: 0
 --- !u!1 &1674883753
 GameObject:
