@@ -81,7 +81,6 @@ public class Brick : MonoBehaviour
         {
             OnBrickHit?.Invoke(this, HitPoints);
         }
-        // Add hitpoints to score
 
         this.HitPoints--;
 
@@ -89,7 +88,7 @@ public class Brick : MonoBehaviour
         {
             BricksManager.Instance.RemainingBricks.Remove(this);
             OnBrickDistruction?.Invoke(this);
-//            OnBrickDestructionBuffs();
+            OnBrickDestructionBuffs();
             SpawnDestroyEffect();
             Destroy(this.gameObject);
         }
@@ -98,7 +97,7 @@ public class Brick : MonoBehaviour
 //            this.sr.sprite = BricksManager.Instance.Sprites[this.HitPoints - 1];
         }
     }
-#if (PI)
+
     private void OnBrickDestructionBuffs()
     {
         float buffSpawnChance = UnityEngine.Random.Range(0, 100f);
@@ -109,10 +108,11 @@ public class Brick : MonoBehaviour
         {
             alreadySpawned = true;
             Collectable newBuff = this.SpawnCollectable(true);
+
         }
         if ((debuffSpawnChance <= CollectablesManager.Instance.DebuffChance) && (alreadySpawned == false))
         {
-            Collectable newBuff = this.SpawnCollectable(false);
+//            Collectable newBuff = this.SpawnCollectable(false);
         }
     }
 
@@ -129,12 +129,18 @@ public class Brick : MonoBehaviour
             collection = CollectablesManager.Instance.AvailableDebuffs;
         }
 
+        Rigidbody2D rb;
+
         int buffIndex = UnityEngine.Random.Range(0, collection.Count);
         Collectable prefab = collection[buffIndex];
         Collectable newCollectable = Instantiate(prefab, this.transform.position, Quaternion.identity) as Collectable;
+        rb = newCollectable.gameObject.GetComponent<Rigidbody2D>();
+        float speed = UnityEngine.Random.Range(-100, -200);
+        rb.AddForce(new Vector2(0, speed));
+
         return newCollectable;
     }
-#endif
+
     private void SpawnDestroyEffect()
     {
         Vector3 brickPos = gameObject.transform.position;

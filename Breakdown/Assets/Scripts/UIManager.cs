@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
-        //        GameManager.OnLifeGained += OnLifeGained;
+        GameManager.OnLifeGained += OnLifeGained;
         GameManager.OnLifeLost += OnLifeLost;
         Paddle.OnPaddleHit += OnPaddleHit;
         BricksManager.OnLevelComplete += OnLevelComplete;
@@ -91,7 +91,7 @@ public class UIManager : MonoBehaviour
         Brick.OnBrickDistruction -= OnBrickDistruction;
         Brick.OnBrickHit -= OnBrickHit;
 
-        //        GameManager.OnLifeGained -= OnLifeGained;
+        GameManager.OnLifeGained -= OnLifeGained;
 
     }
 

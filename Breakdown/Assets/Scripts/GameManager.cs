@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     public bool paused = false;
 
     public static event Action<int> OnLifeLost;
-//    public static event Action<int> OnLifeGained;
+    public static event Action<int> OnLifeGained;
 
 
     public GameObject background;
@@ -90,6 +90,12 @@ public class GameManager : MonoBehaviour
         DeathCheck();
     }
 
+    public void AddLife()
+    {
+        audioSource.PlayOneShot(heartCatch);
+        Lives++;
+        OnLifeGained?.Invoke(this.Lives);
+    }
 
 #if (PI)
 
