@@ -394,10 +394,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8ccff5a554ef3294793e965a9018d407, type: 3}
-    m_FontSize: 40
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 4
     m_MaxSize: 47
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -405,7 +405,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Buy Soundtrack
+  m_Text: Soundtrack
 --- !u!222 &294715542
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -560,7 +560,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f8d13ff2439fc1541873aef2469f132b, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a16713faa64d44043893df2905094afc, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.567
   m_Pitch: 1
