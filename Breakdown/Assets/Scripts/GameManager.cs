@@ -35,16 +35,12 @@ public class GameManager : MonoBehaviour
     public static event Action<int> OnLifeLost;
     public static event Action<int> OnLifeGained;
 
-
     public GameObject background;
     public GameObject leftWall;
     public GameObject topWall;
     public GameObject rightWall;
 
     private int endScore = 0;
-
-    public AudioClip heartCatch;
-    private AudioSource audioSource;
 
     private void Start()
     {
@@ -56,9 +52,6 @@ public class GameManager : MonoBehaviour
         Ball.OnBallDeath += OnBallDeath;
         Brick.OnBrickDistruction += OnBrickDestruction;
 
-        //        Heart.OnHeartCatch += OnHeartCatch;
-        //        Heart.OnHeartDeath += OnHeartDeath;
-
         // Set background and walls sizes
         trans = background.transform;
         childTrans = trans.Find("Graphics"); 
@@ -68,8 +61,6 @@ public class GameManager : MonoBehaviour
         Utilities.ResizeAndPositionSprite(leftWall.gameObject);
         Utilities.ResizeAndPositionSprite(topWall.gameObject);
         Utilities.ResizeAndPositionSprite(rightWall.gameObject);
-
-        audioSource = GetComponentInChildren<AudioSource>();
 
         paused = false;
     }
@@ -92,29 +83,10 @@ public class GameManager : MonoBehaviour
 
     public void AddLife()
     {
-        audioSource.PlayOneShot(heartCatch);
+        SoundManager.Instance.PlayHeart();
         Lives++;
         OnLifeGained?.Invoke(this.Lives);
     }
-
-#if (PI)
-
-    private void OnHeartCatch(Heart obj)
-    {
-        audioSource.PlayOneShot(heartCatch);
-
-        this.Lives++;
-        OnLifeGained?.Invoke(this.Lives);
-
-        DeathCheck();
-    }
-
-    private void OnHeartDeath(Heart obj)
-    {
-        DeathCheck();
-    }
-
-#endif
 
     private void DeathCheck()
     {
@@ -133,7 +105,6 @@ public class GameManager : MonoBehaviour
                 OnLifeLost?.Invoke(this.Lives);
                 BallsManager.Instance.ResetBalls();
                 IsGameStarted = false;
-//                BlocksManager.Instance.NewLevel();
             }
         }
     }
@@ -142,11 +113,6 @@ public class GameManager : MonoBehaviour
     {
         Ball.OnBallDeath -= OnBallDeath;
         Brick.OnBrickDistruction -= OnBrickDestruction;
-
-#if (PI)
-        Heart.OnHeartCatch -= OnHeartCatch;
-        Heart.OnHeartDeath -= OnHeartDeath;
-#endif
     }
 
     private void OnBrickDestruction(Brick obj)
@@ -166,13 +132,12 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator PauseGame(float pauseTime)
     {
-//        Time.timeScale = 0f;
         float pauseEndTime = Time.realtimeSinceStartup + pauseTime;
         while (Time.realtimeSinceStartup < pauseEndTime)
         {
             yield return 0;
         }
-//Time.timeScale = 1f;
+
         PauseEnded();
     }
 

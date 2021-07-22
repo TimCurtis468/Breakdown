@@ -5,11 +5,6 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    public AudioClip[] soundFX;
-    public AudioClip[] loFX;
-
-    private AudioSource audioSource;
-
     private SpriteRenderer sr;
 
     public static event Action<Ball> OnBallDeath;
@@ -18,24 +13,19 @@ public class Ball : MonoBehaviour
     private void Awake()
     {
         this.sr = GetComponentInChildren<SpriteRenderer>();
-        audioSource = GetComponentInChildren<AudioSource>();
         Utilities.ResizeSprite(this.gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
-        int numFx;
-
         switch(coll.gameObject.tag)
         {
             case "Ball":
             case "Paddle":
-                numFx = UnityEngine.Random.Range(0, soundFX.Length);
-                audioSource.PlayOneShot(soundFX[numFx]);
+                SoundManager.Instance.PlaySoundFx(false);
                 break;
             case "Brick":
-                numFx = UnityEngine.Random.Range(0, loFX.Length);
-                audioSource.PlayOneShot(loFX[numFx]);
+                SoundManager.Instance.PlaySoundFx(true);
 
                 Rigidbody2D ballRbx = this.GetComponent<Rigidbody2D>();
 
@@ -55,15 +45,10 @@ public class Ball : MonoBehaviour
 
                 break;
             case "Block":
-                numFx = UnityEngine.Random.Range(0, loFX.Length);
-                audioSource.PlayOneShot(loFX[numFx]);
+                SoundManager.Instance.PlaySoundFx(true);
                 break;
             case "Walls":
-                numFx = UnityEngine.Random.Range(0, loFX.Length);
-                if (loFX[numFx] != null)
-                {
-                    audioSource.PlayOneShot(loFX[numFx]);
-                }
+                SoundManager.Instance.PlaySoundFx(true);
 
                 Rigidbody2D ballRb = this.GetComponent<Rigidbody2D>();
 
