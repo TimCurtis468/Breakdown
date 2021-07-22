@@ -101,8 +101,11 @@ public class BallsManager : MonoBehaviour
 
     public void DestroyBalls()
     {
-        foreach (var ball in this.Balls.ToList())
+        int numBalls = Balls.Count - 1;
+        for (int idx = numBalls; idx >= 0; idx--)
+//        foreach (var ball in this.Balls.ToList())
         {
+            var ball = Balls[idx];
             Destroy(ball.gameObject);
         }
 #if (PI)
@@ -116,8 +119,11 @@ public class BallsManager : MonoBehaviour
 
     public void ResetBalls()
     {
-        foreach (var ball in this.Balls.ToList())
+        int numBalls = Balls.Count - 1;
+        for (int idx = numBalls; idx >= 0; idx--)
+//            foreach (var ball in this.Balls.ToList())
         {
+            var ball = Balls[idx];
             Destroy(ball.gameObject);
         }
 #if (PI)

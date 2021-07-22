@@ -60,7 +60,10 @@ public class Ball : MonoBehaviour
                 break;
             case "Walls":
                 numFx = UnityEngine.Random.Range(0, loFX.Length);
-                audioSource.PlayOneShot(loFX[numFx]);
+                if (loFX[numFx] != null)
+                {
+                    audioSource.PlayOneShot(loFX[numFx]);
+                }
 
                 Rigidbody2D ballRb = this.GetComponent<Rigidbody2D>();
 
