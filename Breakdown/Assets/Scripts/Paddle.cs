@@ -95,16 +95,5 @@ public class Paddle : MonoBehaviour
 
             OnPaddleHit?.Invoke(this, 0);
         }
-#if (PI)
-        else if (coll.gameObject.tag == "Heart")
-        {
-            if (BallsManager.Instance.Hearts.Count > 0)
-            {
-                Heart heart = coll.gameObject.GetComponent<Heart>();
-                BallsManager.Instance.Hearts.Remove(heart);
-                heart.Catch();
-            }
-        }
-#endif
     }
 }

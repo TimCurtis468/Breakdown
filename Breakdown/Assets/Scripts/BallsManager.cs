@@ -68,16 +68,10 @@ public class BallsManager : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                float x_speed = UnityEngine.Random.Range(50.0f, 100.0f);
-                float y_speed = UnityEngine.Random.Range(250.0f, 450.0f);
-                int direction = UnityEngine.Random.Range(1, 3);
-                if (direction == 1)
-                {
-                    x_speed = -x_speed;
-                }
+                float y_speed = UnityEngine.Random.Range(250.0f, 350.0f);
 
                 BallRbs[0].isKinematic = false;
-                BallRbs[0].AddForce(new Vector2(x_speed, y_speed));
+                BallRbs[0].AddForce(new Vector2(0, y_speed));
                 GameManager.Instance.IsGameStarted = true;
             }
         }
