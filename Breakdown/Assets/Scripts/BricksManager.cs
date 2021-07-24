@@ -81,10 +81,18 @@ public class BricksManager : MonoBehaviour
 
     private void ClearRemainingBricks()
     {
-        foreach (Brick brick in this.RemainingBricks.ToList())
+        int numBricks = RemainingBricks.Count - 1;
+        //        foreach (Brick brick in this.RemainingBricks.ToList())
+
+        for(int idx = numBricks; numBricks >= 0; numBricks-- )
         {
-            Destroy(brick.gameObject);
+            var brick = RemainingBricks[idx].gameObject;
+            if (brick != null)
+            {
+                Destroy(brick);
+            }
         }
+        RemainingBricks.Clear();
     }
 
     private void GenerateBricks()

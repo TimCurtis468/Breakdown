@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     public void AddLife()
     {
-        SoundManager.Instance.PlayHeart();
+        SoundFxManager.Instance.PlayHeart();
         Lives++;
         OnLifeGained?.Invoke(this.Lives);
     }
@@ -99,6 +99,7 @@ public class GameManager : MonoBehaviour
                 BallsManager.Instance.DestroyBalls();
                 EndScreen.score = endScore;
                 SceneManager.LoadScene("GameOver");
+                MusicManager.Instance.StopMusic();
             }
             else
             {

@@ -22,11 +22,10 @@ public class Ball : MonoBehaviour
         {
             case "Ball":
             case "Paddle":
-                SoundManager.Instance.PlaySoundFx(false);
+                SoundFxManager.Instance.PlaySoundFx(false);
                 break;
             case "Brick":
-                SoundManager.Instance.PlaySoundFx(true);
-
+                SoundFxManager.Instance.PlaySoundFx(true);
                 Rigidbody2D ballRbx = this.GetComponent<Rigidbody2D>();
 
                 /* Check if low X velocity and speed it up if it is */
@@ -45,10 +44,10 @@ public class Ball : MonoBehaviour
 
                 break;
             case "Block":
-                SoundManager.Instance.PlaySoundFx(true);
+                SoundFxManager.Instance.PlaySoundFx(true);
                 break;
             case "Walls":
-                SoundManager.Instance.PlaySoundFx(true);
+                SoundFxManager.Instance.PlaySoundFx(true);
 
                 Rigidbody2D ballRb = this.GetComponent<Rigidbody2D>();
 

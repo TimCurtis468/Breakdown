@@ -166,11 +166,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9a7bb7fe48290f438a37dfa4b18dea6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundFX:
-  - {fileID: 8300000, guid: d10ee19cf8fed494dbaa2dc1829ea761, type: 3}
-  - {fileID: 8300000, guid: 896e39cbb975be84e8886fc83c27bfec, type: 3}
-  - {fileID: 8300000, guid: 47ae2151ae2a3e04c980ccecce3d0652, type: 3}
-  loFX:
-  - {fileID: 8300000, guid: 054b5d67f90d8e648b3dc0d4e00170f6, type: 3}
-  - {fileID: 8300000, guid: 952e4faf9d003d4429263adf4e6dede2, type: 3}
-  - {fileID: 8300000, guid: e48df1bc872b521478e832f7eea76882, type: 3}

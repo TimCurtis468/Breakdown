@@ -6,17 +6,23 @@ public class Multiball : Collectable
 {
     protected override void ApplyEffect()
     {
-        int numBalls = BallsManager.Instance.Balls.Count - 1;
-        for (int idx = numBalls; idx >= 0; idx--)
-//            foreach (Ball ball in BallsManager.Instance.Balls)
+        try
         {
-            // Limit number of balls
-            if (BallsManager.Instance.Balls.Count < 10)
+            int numBalls = BallsManager.Instance.Balls.Count - 1;
+            for (int idx = numBalls; idx >= 0; idx--)
+            //            foreach (Ball ball in BallsManager.Instance.Balls)
             {
-                var ball = BallsManager.Instance.Balls[idx];
-                BallsManager.Instance.SpawnBalls(ball.gameObject.transform.position, 2, false);
+                // Limit number of balls
+                if (BallsManager.Instance.Balls.Count < 10)
+                {
+                    var ball = BallsManager.Instance.Balls[idx];
+                    BallsManager.Instance.SpawnBalls(ball.gameObject.transform.position, 2, false);
+                }
             }
         }
+        catch
+        {
 
+        }
     }
 }
