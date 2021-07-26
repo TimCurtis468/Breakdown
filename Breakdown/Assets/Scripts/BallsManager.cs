@@ -82,10 +82,10 @@ public class BallsManager : MonoBehaviour
         for (int i = 0; i < count; i++)
         {
             Ball spawnedBall = Instantiate(ballPrefab, position, Quaternion.identity);
-//            if (isLightningBall == true)
-//            {
-//                spawnedBall.StartLightningBall();
-//            }
+            if (isLightningBall == true)
+            {
+                spawnedBall.StartLightningBall();
+            }
             Rigidbody2D spawnedBallRb = spawnedBall.GetComponent<Rigidbody2D>();
             spawnedBallRb.isKinematic = false;
             spawnedBallRb.AddForce(new Vector2(i, initialBallSpeed * 2));

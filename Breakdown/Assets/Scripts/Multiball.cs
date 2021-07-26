@@ -16,7 +16,7 @@ public class Multiball : Collectable
                 if (BallsManager.Instance.Balls.Count < 10)
                 {
                     var ball = BallsManager.Instance.Balls[idx];
-                    BallsManager.Instance.SpawnBalls(ball.gameObject.transform.position, 2, false);
+                    BallsManager.Instance.SpawnBalls(ball.gameObject.transform.position, 2, ball.isLightningBall);
                 }
             }
         }

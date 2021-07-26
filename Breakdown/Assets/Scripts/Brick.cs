@@ -19,11 +19,10 @@ public class Brick : MonoBehaviour
         this.sr = this.GetComponent<SpriteRenderer>();
         this.boxCol = this.GetComponent<BoxCollider2D>();
 
-//        Ball.OnLightningBallEnable += OnLightningBallEnable;
-//        Ball.OnLightningBallDisable += OnLightningBallDisable;
+        Ball.OnLightningBallEnable += OnLightningBallEnable;
+        Ball.OnLightningBallDisable += OnLightningBallDisable;
     }
 
-#if (PI)
     private void OnLightningBallDisable(Ball obj)
     {
         if (this != null)
@@ -39,7 +38,7 @@ public class Brick : MonoBehaviour
             this.boxCol.isTrigger = true;
         }
     }
-#endif
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         bool instantKill = false;
@@ -47,7 +46,7 @@ public class Brick : MonoBehaviour
         if (collision.collider.tag == "Ball")
         {
             Ball ball = collision.gameObject.GetComponent<Ball>();
-//            instantKill = ball.isLightningBall;
+            instantKill = ball.isLightningBall;
         }
 
         if ((collision.collider.tag == "Ball") || (collision.collider.tag == "Projectile"))
@@ -65,7 +64,7 @@ public class Brick : MonoBehaviour
         if (collision.gameObject.tag == "Ball")
         {
             Ball ball = collision.gameObject.GetComponent<Ball>();
-//            instantKill = ball.isLightningBall;
+            instantKill = ball.isLightningBall;
         }
 
         if ((collision.gameObject.tag == "Ball") || (collision.gameObject.tag == "Projectile"))
@@ -162,7 +161,7 @@ public class Brick : MonoBehaviour
 
     private void OnDisable()
     {
-//        Ball.OnLightningBallEnable -= OnLightningBallEnable;
- //       Ball.OnLightningBallDisable -= OnLightningBallDisable;
+        Ball.OnLightningBallEnable -= OnLightningBallEnable;
+        Ball.OnLightningBallDisable -= OnLightningBallDisable;
     }
 }
