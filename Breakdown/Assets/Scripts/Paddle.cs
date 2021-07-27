@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class Paddle : MonoBehaviour
 {
@@ -33,6 +34,13 @@ public class Paddle : MonoBehaviour
     private float objectWidth;
 
     public static event Action<Paddle, int> OnPaddleHit;
+
+    public bool PaddleIsTransforming { get; set; }
+
+    public float extendShrinkDuration = 1;
+    public float paddleWidth = 2.0f;
+    public float paddleHeight = 0.28f;
+
 
     void Start()
     {
@@ -95,5 +103,46 @@ public class Paddle : MonoBehaviour
 
             OnPaddleHit?.Invoke(this, 0);
         }
+    }
+
+    public void StartWidthAnimation(float newWidth)
+    {
+        StartCoroutine(AnimationPaddleWidth(newWidth));
+    }
+
+    private IEnumerator AnimationPaddleWidth(float width)
+    {
+        this.PaddleIsTransforming = true;
+        this.StartCoroutine(ResetPaddleWidthAfterTime(this.extendShrinkDuration));
+
+        if (width > this.sr.size.x)
+        {
+            float currentWidth = this.sr.size.x;
+            while (currentWidth < width)
+            {
+                currentWidth += Time.deltaTime * 2;
+                this.sr.size = new Vector2(currentWidth, paddleHeight);
+                boxCol.size = new Vector2(currentWidth, paddleHeight);
+                yield return null;
+            }
+        }
+        else
+        {
+            float currentWidth = this.sr.size.x;
+            while (currentWidth > width)
+            {
+                currentWidth -= Time.deltaTime * 2;
+                this.sr.size = new Vector2(currentWidth, paddleHeight);
+                boxCol.size = new Vector2(currentWidth, paddleHeight);
+                yield return null;
+            }
+        }
+        this.PaddleIsTransforming = false;
+    }
+
+    private IEnumerator ResetPaddleWidthAfterTime(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        this.StartWidthAnimation(this.paddleWidth);
     }
 }
