@@ -60,10 +60,10 @@ public class BallsManager : MonoBehaviour
     private void Update()
     {
 
-        if (!GameManager.Instance.IsGameStarted)
+        if((GameManager.Instance != null) &&(!GameManager.Instance.IsGameStarted))
         {
             Vector3 paddlePosition = Paddle.Instance.gameObject.transform.position;
-            Vector3 ballPosition = new Vector3(paddlePosition.x, paddlePosition.y + 0.27f, 0);
+            Vector3 ballPosition = new Vector3(paddlePosition.x - 0.046f, paddlePosition.y + 0.27f, 0);
             Balls[0].transform.position = ballPosition;
 
             if (Input.GetMouseButtonDown(0))
