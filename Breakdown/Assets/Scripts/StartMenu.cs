@@ -8,12 +8,16 @@ public class StartMenu : MonoBehaviour
     public GameObject Title;
     public GameObject VV;
     public GameObject background;
+    public GameObject loading;
 
     // Start is called before the first frame update
     void Start()
     {
+        loading.SetActive(false);
+
         Utilities.ResizeAndPositionSprite(Title.gameObject);
         Utilities.ResizeAndPositionSprite(VV.gameObject);
+        Utilities.ResizeAndPositionSprite(loading.gameObject);
         Utilities.ResizeSpriteToFullScreen(background.gameObject);
     }
 
@@ -24,6 +28,7 @@ public class StartMenu : MonoBehaviour
     }
     public void ChangeMenuScene(string sceneName)
     {
+        loading.SetActive(true);
         SceneManager.LoadScene(sceneName);
     }
 }

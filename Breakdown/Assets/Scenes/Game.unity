@@ -1567,13 +1567,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AvailableBuffs:
+  - {fileID: 886610185214057142, guid: f23b3c01cefbe70409c48e14defeaa46, type: 3}
+  - {fileID: 5942664546718290914, guid: e33c159ec5bdc424783b5d2f59a8fbb4, type: 3}
+  - {fileID: 7208043558402213575, guid: b05d2795b5702af419f8767778bba074, type: 3}
   - {fileID: 21330138112431332, guid: 0de67096e36294442a61c45f50638ac5, type: 3}
-  - {fileID: 21330138112431332, guid: 0de67096e36294442a61c45f50638ac5, type: 3}
+  AvailableDebuffs:
   - {fileID: 7944776267892804978, guid: 2f66c95c84430794e84d11f5e50e6a17, type: 3}
-  - {fileID: 7944776267892804978, guid: 2f66c95c84430794e84d11f5e50e6a17, type: 3}
-  AvailableDebuffs: []
-  BuffChance: 8.4
-  DebuffChance: 0
+  BuffChance: 6.4
+  DebuffChance: 2
 --- !u!1 &1674883753
 GameObject:
   m_ObjectHideFlags: 0
