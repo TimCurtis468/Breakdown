@@ -45,7 +45,7 @@ public class Paddle : MonoBehaviour
     private Vector3 topRightCorner;
 
     // Shooting
-    public bool PaddleIsShooting { get; set; }
+    public bool PaddleIsShooting { get; set; } = false;
     public GameObject leftMuzzle;
     public GameObject rightMuzzle;
     public Projectile bulletPrefab;
@@ -53,6 +53,9 @@ public class Paddle : MonoBehaviour
 
     void Start()
     {
+        leftMuzzle.SetActive(false);
+        rightMuzzle.SetActive(false);
+
         screenEdgeOffset = Utilities.ResizeXValue(screenEdgeOffset);
         paddleCentreOffset = Utilities.ResizeXValue(paddleCentreOffset);
 
