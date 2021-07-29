@@ -26,7 +26,7 @@ public class Paddle : MonoBehaviour
     private float leftClamp = 0;
     private float rightClamp = 410;
     private float screenEdgeOffset = 0.15f;
-    private float shadowWidth = 0.04f;
+    private float shadowWidth;
     private SpriteRenderer sr;
     private BoxCollider2D boxCol;
 
@@ -66,13 +66,12 @@ public class Paddle : MonoBehaviour
 
         topRightCorner = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
-//        objectWidth = boxCol.bounds.extents.x;
-//        objectWidth = Utilities.ResizeXValue(objectWidth);
+        // Shadow doesn't change size when the paddle gets bigger/smaller, so keep this a contant value
+        shadowWidth = sr.bounds.extents.x;
+        shadowWidth = Utilities.ResizeXValue(shadowWidth);
+        shadowWidth = shadowWidth / 5.0f;
 
-//        leftClamp = -topRightCorner.x + objectWidth + screenEdgeOffset + paddleCentreOffset;
-//        rightClamp = topRightCorner.x - objectWidth - screenEdgeOffset + paddleCentreOffset;
-
-        SetClamps();
+        SetClamps(true);
 
         Utilities.ResizeSprite(this.gameObject);
     }
@@ -89,15 +88,15 @@ public class Paddle : MonoBehaviour
         rightMuzzle.transform.position = new Vector3(this.transform.position.x + (this.sr.size.x / 2) - 0.153f, this.transform.position.y + 0.2f, this.transform.position.z);
     }
 
-    private void SetClamps()
+    private void SetClamps(bool init)
     {
-        objectWidth = boxCol.bounds.extents.x;
-        objectWidth = Utilities.ResizeXValue(objectWidth);
-
-        leftClamp = -topRightCorner.x + objectWidth + screenEdgeOffset + paddleCentreOffset;
-//        leftClamp = Utilities.ResizeXValue(leftClamp);
-        rightClamp = topRightCorner.x - objectWidth - screenEdgeOffset + paddleCentreOffset + shadowWidth;
-//        rightClamp = Utilities.ResizeXValue(rightClamp);
+        objectWidth = sr.bounds.extents.x;
+        if (init == true)
+        {
+            objectWidth = Utilities.ResizeXValue(objectWidth);
+        }
+        leftClamp = -topRightCorner.x + objectWidth + (topRightCorner.x/20.0f);   
+        rightClamp = topRightCorner.x - objectWidth + shadowWidth - (topRightCorner.x / 20.0f); 
     }
 
     private void PaddleMovement()
@@ -167,7 +166,7 @@ public class Paddle : MonoBehaviour
             }
         }
         this.PaddleIsTransforming = false;
-        SetClamps();
+        SetClamps(false);
     }
 
     private IEnumerator ResetPaddleWidthAfterTime(float seconds)

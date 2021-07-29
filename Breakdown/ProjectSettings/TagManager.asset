@@ -47,11 +47,11 @@ TagManager:
   - name: Background
     uniqueID: 284693655
     locked: 0
-  - name: Walls
-    uniqueID: 2602532473
-    locked: 0
   - name: Balls
     uniqueID: 663767623
+    locked: 0
+  - name: Walls
+    uniqueID: 2602532473
     locked: 0
   - name: Paddle
     uniqueID: 4215244193

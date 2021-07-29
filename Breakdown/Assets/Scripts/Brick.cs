@@ -111,7 +111,7 @@ public class Brick : MonoBehaviour
         }
         if ((debuffSpawnChance <= CollectablesManager.Instance.DebuffChance) && (alreadySpawned == false))
         {
-//            Collectable newBuff = this.SpawnCollectable(false);
+            Collectable newBuff = this.SpawnCollectable(false);
         }
     }
 
