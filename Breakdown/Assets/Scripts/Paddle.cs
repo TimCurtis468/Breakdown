@@ -44,6 +44,12 @@ public class Paddle : MonoBehaviour
 
     private Vector3 topRightCorner;
 
+    // Shooting
+    public bool PaddleIsShooting { get; set; }
+    public GameObject leftMuzzle;
+    public GameObject rightMuzzle;
+    public Projectile bulletPrefab;
+
 
     void Start()
     {
@@ -72,6 +78,12 @@ public class Paddle : MonoBehaviour
     void LateUpdate()
     {
         PaddleMovement();
+        UpdateMuzzlePosition();
+    }
+        private void UpdateMuzzlePosition()
+    {
+        leftMuzzle.transform.position = new Vector3(this.transform.position.x - (this.sr.size.x / 2) + 0.1f, this.transform.position.y + 0.2f, this.transform.position.z);
+        rightMuzzle.transform.position = new Vector3(this.transform.position.x + (this.sr.size.x / 2) - 0.153f, this.transform.position.y + 0.2f, this.transform.position.z);
     }
 
     private void SetClamps()
@@ -160,5 +172,66 @@ public class Paddle : MonoBehaviour
 
         yield return new WaitForSeconds(seconds);
         this.StartWidthAnimation(this.paddleWidth);
+    }
+
+    public void StartShooting()
+    {
+        if (this.PaddleIsShooting == false)
+        {
+            this.PaddleIsShooting = true;
+            StartCoroutine(StartShootingRoutine());
+        }
+    }
+
+    public IEnumerator StartShootingRoutine()
+    {
+        float fireCooldown = 0.5f;
+        float fireCooldownleft = 0.0f;
+
+        float shootingDuration = 20.0f;
+        float shootingDurationLeft = shootingDuration;
+
+        //        Debug.Log("START SHOOTING");
+
+        while (shootingDurationLeft >= 0.0)
+        {
+            fireCooldownleft -= Time.deltaTime;
+            shootingDurationLeft -= Time.deltaTime;
+
+            if (fireCooldownleft <= 0.0f)
+            {
+                this.Shoot();
+                fireCooldownleft = fireCooldown;
+                //                Debug.Log("Shoot at {time.time}");
+            }
+
+            yield return null;
+        }
+
+        //        Debug.Log("STOPPED SHOOTING");
+        this.PaddleIsShooting = false;
+        leftMuzzle.SetActive(false);
+        rightMuzzle.SetActive(false);
+    }
+
+    private void Shoot()
+    {
+        leftMuzzle.SetActive(false);
+        rightMuzzle.SetActive(false);
+
+        leftMuzzle.SetActive(true);
+        rightMuzzle.SetActive(true);
+
+        this.SpawnBullet(leftMuzzle);
+        this.SpawnBullet(rightMuzzle);
+    }
+
+    private void SpawnBullet(GameObject muzzle)
+    {
+        Vector3 spawnPosition = new Vector3(muzzle.transform.position.x, muzzle.transform.position.y + 0.2f, muzzle.transform.position.y);
+        Projectile bullet = Instantiate(bulletPrefab, spawnPosition, Quaternion.identity);
+        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
+        bulletRb.AddForce(new Vector2(0, 450.0f));
+
     }
 }

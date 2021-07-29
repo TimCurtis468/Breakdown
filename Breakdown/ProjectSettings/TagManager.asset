@@ -9,6 +9,7 @@ TagManager:
   - Paddle
   - Ball
   - Block
+  - Projectile
   layers:
   - Default
   - TransparentFX
