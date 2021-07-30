@@ -97,6 +97,12 @@ public class Brick : MonoBehaviour
         }
     }
 
+    public void RemoveBrick()
+    {
+        Destroy(this.gameObject);
+
+    }
+
     private void OnBrickDestructionBuffs()
     {
         float buffSpawnChance = UnityEngine.Random.Range(0, 100f);
