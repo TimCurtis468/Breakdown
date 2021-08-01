@@ -52,9 +52,7 @@ public class Brick : MonoBehaviour
         if ((collision.collider.tag == "Ball") || (collision.collider.tag == "Projectile"))
         {
             TakeDamage(instantKill);
-
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -70,7 +68,6 @@ public class Brick : MonoBehaviour
         if ((collision.gameObject.tag == "Ball") || (collision.gameObject.tag == "Projectile"))
         {
             TakeDamage(instantKill);
-
         }
     }
 

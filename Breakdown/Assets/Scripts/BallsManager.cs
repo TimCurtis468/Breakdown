@@ -25,15 +25,8 @@ public class BallsManager : MonoBehaviour
     #endregion
     [SerializeField]
     private Ball ballPrefab;
-//    public Heart heartPrefab;
 
     private Ball initialBall;
-
-    private Rigidbody2D initialBallRb;
-
-    private Camera mainCamera;
-    private Vector2 screenBounds;
-
 
     public float initialBallSpeed = 250;
 
@@ -42,24 +35,15 @@ public class BallsManager : MonoBehaviour
     public List<Ball> Balls { get; set; }
     public List<Rigidbody2D> BallRbs { get; set; }
 
-//    public List<Heart> Hearts { get; set; }
-
-
     private void Start()
     {
-        mainCamera = FindObjectOfType<Camera>();
-        screenBounds = mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z));
-
         Balls = new List<Ball>();
         BallRbs = new List<Rigidbody2D>();
-//        Hearts = new List<Heart>();
-
         InitBall();
     }
 
     private void Update()
     {
-
         if((GameManager.Instance != null) &&(!GameManager.Instance.IsGameStarted))
         {
             Vector3 paddlePosition = Paddle.Instance.gameObject.transform.position;
@@ -97,17 +81,11 @@ public class BallsManager : MonoBehaviour
     {
         int numBalls = Balls.Count - 1;
         for (int idx = numBalls; idx >= 0; idx--)
-//        foreach (var ball in this.Balls.ToList())
         {
             var ball = Balls[idx];
+            ball.StopLightingBall();
             Destroy(ball.gameObject);
         }
-#if (PI)
-        foreach (var heart in this.Hearts.ToList())
-        {
-            Destroy(heart.gameObject);
-        }
-#endif
     }
 
 
@@ -115,19 +93,11 @@ public class BallsManager : MonoBehaviour
     {
         int numBalls = Balls.Count - 1;
         for (int idx = numBalls; idx >= 0; idx--)
-//            foreach (var ball in this.Balls.ToList())
         {
             var ball = Balls[idx];
+            ball.StopLightingBall();
             Destroy(ball.gameObject);
         }
-#if (PI)
-
-        foreach (var heart in this.Hearts.ToList())
-        {
-            Destroy(heart.gameObject);
-        }
-
-#endif
 
         InitBall();
     }
@@ -135,13 +105,9 @@ public class BallsManager : MonoBehaviour
     private void InitBall()
     {
         Rigidbody2D newBallRb;
-//        Heart newHeart;
-
-        int numDrumsticks = UnityEngine.Random.Range(0, 2);
 
         Balls.Clear();
         BallRbs.Clear();
-
 
         Vector3 paddlePosition = Paddle.Instance.gameObject.transform.position;
         Vector3 startingPosition = new Vector3(paddlePosition.x, paddlePosition.y + 0.27f, 0);
@@ -150,10 +116,5 @@ public class BallsManager : MonoBehaviour
 
         Balls.Add(initialBall);
         BallRbs.Add(newBallRb);
-
-
-//        Vector3 heartPosition = new Vector3(0.8f, -screenBounds.y / 2, 0);
-//        newHeart = Instantiate(heartPrefab, heartPosition, Quaternion.identity);
-//        Hearts.Add(newHeart);
     }
 }

@@ -106,7 +106,7 @@ public class Ball : MonoBehaviour
         StopLightingBall();
     }
 
-    private void StopLightingBall()
+    public void StopLightingBall()
     {
         if (this.isLightningBall == true)
         {

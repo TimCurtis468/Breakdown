@@ -25,7 +25,7 @@ public class Frenzy : Collectable
                 if (BallsManager.Instance.Balls.Count < 10)
                 {
                     var ball = BallsManager.Instance.Balls[idx];
-                    BallsManager.Instance.SpawnBalls(ball.gameObject.transform.position, 2, ball.isLightningBall);
+                    BallsManager.Instance.SpawnBalls(ball.gameObject.transform.position, 5, ball.isLightningBall);
                 }
             }
         }
