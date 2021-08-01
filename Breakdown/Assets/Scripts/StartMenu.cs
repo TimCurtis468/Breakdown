@@ -19,6 +19,8 @@ public class StartMenu : MonoBehaviour
         Utilities.ResizeAndPositionSprite(VV.gameObject);
         Utilities.ResizeAndPositionSprite(loading.gameObject);
         Utilities.ResizeSpriteToFullScreen(background.gameObject);
+
+        AdManager.Instance.RequestBanner(GoogleMobileAds.Api.AdPosition.Bottom);
     }
 
     // Update is called once per frame
@@ -28,6 +30,7 @@ public class StartMenu : MonoBehaviour
     }
     public void ChangeMenuScene(string sceneName)
     {
+        AdManager.Instance.DestroyBanner();
         loading.SetActive(true);
         SceneManager.LoadScene(sceneName);
     }

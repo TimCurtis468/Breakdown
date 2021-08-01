@@ -62,6 +62,8 @@ public class GameManager : MonoBehaviour
         Utilities.ResizeAndPositionSprite(topWall.gameObject);
         Utilities.ResizeAndPositionSprite(rightWall.gameObject);
 
+        AdManager.Instance.RequestBanner(GoogleMobileAds.Api.AdPosition.Top);
+
         paused = false;
     }
 
@@ -96,6 +98,7 @@ public class GameManager : MonoBehaviour
 
             if (this.Lives < 1)
             {
+                AdManager.Instance.DestroyBanner();
                 BallsManager.Instance.DestroyBalls();
                 EndScreen.score = endScore;
                 SceneManager.LoadScene("GameOver");
@@ -121,6 +124,7 @@ public class GameManager : MonoBehaviour
         if (BricksManager.Instance.RemainingBricks.Count <= 0)
         {
             paused = true;
+
             // Pause for 1 second 
             StartPause(1);
         }
