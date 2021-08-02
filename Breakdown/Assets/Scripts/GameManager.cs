@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
 
     private int endScore = 0;
 
+    private int level = 1;
+    private int nextAd = 4;
+
     private void Start()
     {
         GameObject obj;
@@ -65,6 +68,9 @@ public class GameManager : MonoBehaviour
         AdManager.Instance.RequestBanner(GoogleMobileAds.Api.AdPosition.Top);
 
         paused = false;
+
+        level = 1;
+        nextAd = 4;
     }
 
     public void SetScore(int score)
@@ -76,6 +82,8 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         this.Lives = AvailableLives;
+        level = 1;
+        nextAd = 4;
     }
 
     private void OnBallDeath(Ball obj)
@@ -124,6 +132,12 @@ public class GameManager : MonoBehaviour
         if (BricksManager.Instance.RemainingBricks.Count <= 0)
         {
             paused = true;
+            if (level == nextAd)
+            {
+                AdManager.Instance.RequestInterstital();
+                int rand = UnityEngine.Random.Range(3, 5);
+                nextAd += rand;
+            }
 
             // Pause for 1 second 
             StartPause(1);
@@ -149,6 +163,7 @@ public class GameManager : MonoBehaviour
     public void PauseEnded()
     {
         paused = false;
+        level++;
         BallsManager.Instance.ResetBalls();
         GameManager.Instance.IsGameStarted = false;
         BricksManager.Instance.LoadNextLevel();

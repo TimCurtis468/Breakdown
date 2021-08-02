@@ -50,7 +50,7 @@ public class BallsManager : MonoBehaviour
             Vector3 ballPosition = new Vector3(paddlePosition.x - 0.046f, paddlePosition.y + 0.27f, 0);
             Balls[0].transform.position = ballPosition;
 
-            if (Input.GetMouseButtonDown(0))
+            if ((Input.GetMouseButtonDown(0)) && (AdManager.Instance.isInterstialClosed() == true))
             {
                 float y_speed = UnityEngine.Random.Range(250.0f, 350.0f);
 
