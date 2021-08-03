@@ -40,6 +40,8 @@ public class GameManager : MonoBehaviour
     public GameObject topWall;
     public GameObject rightWall;
 
+    public GameObject gameOver;
+
     private int endScore = 0;
 
     private int level = 1;
@@ -50,6 +52,11 @@ public class GameManager : MonoBehaviour
         GameObject obj;
         Transform trans;
         Transform childTrans;
+
+        if (gameOver != null)
+        {
+            gameOver.SetActive(false);
+        }
 
         this.Lives = AvailableLives;
         Ball.OnBallDeath += OnBallDeath;
@@ -106,11 +113,15 @@ public class GameManager : MonoBehaviour
 
             if (this.Lives < 1)
             {
-                AdManager.Instance.DestroyBanner();
                 BallsManager.Instance.DestroyBalls();
-                EndScreen.score = endScore;
-                SceneManager.LoadScene("GameOver");
-                MusicManager.Instance.StopMusic();
+
+                if(gameOver != null)
+                {
+                    gameOver.SetActive(true);
+                    Paddle.Instance.isActive = false;
+                    Paddle.Instance.PaddleIsShooting = false;
+                    MusicManager.Instance.StopMusic();
+                }
             }
             else
             {
@@ -119,6 +130,35 @@ public class GameManager : MonoBehaviour
                 IsGameStarted = false;
             }
         }
+    }
+
+    public void GameOverWatchVid()
+    {
+        AdManager.Instance.RequestRewarded();
+    }
+
+    public void GameOverExtraLife()
+    {
+        this.Lives++;
+        gameOver.SetActive(false);
+        AdManager.Instance.DestroyRewarded();
+
+        OnLifeLost?.Invoke(this.Lives);
+        BallsManager.Instance.ResetBalls();
+        IsGameStarted = false;
+        Paddle.Instance.isActive = true;
+        MusicManager.Instance.StartMusic();
+    }
+
+    public void MoveToNextScene()
+    {
+        gameOver.SetActive(false);
+        AdManager.Instance.DestroyRewarded();
+        AdManager.Instance.DestroyBanner();
+
+        Paddle.Instance.isActive = true;
+        EndScreen.score = endScore;
+        SceneManager.LoadScene("GameOver");
     }
 
     private void OnDisable()

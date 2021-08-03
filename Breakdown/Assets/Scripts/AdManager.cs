@@ -33,11 +33,13 @@ public class AdManager : MonoBehaviour
 
     private BannerView bannerView;
     private InterstitialAd interstitial;
+    private RewardedAd rewardedAd;
 
     private bool interAdClosed = true;
 
     private string bannerAdId = "ca-app-pub-3940256099942544/6300978111";
     private string interstitialAdId = "ca-app-pub-3940256099942544/1033173712";
+    private string rewardedAdId = "ca-app-pub-3940256099942544/5224354917";
 
     public void Start()
     {
@@ -108,6 +110,60 @@ public class AdManager : MonoBehaviour
             this.interstitial.OnAdLoaded -= HandleOnInterstitialAdLoaded;
             interstitial.Destroy();
         }
+    }
+
+    /****************
+     * REWARDED     *
+     ****************/
+    public void RequestRewarded()
+    {
+        // Rewarded ad
+        this.rewardedAd = new RewardedAd(rewardedAdId);
+
+
+        // Called when an ad request has successfully loaded.
+        this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
+        // Called when the user should be rewarded for interacting with the ad.
+        this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
+        this.rewardedAd.OnAdClosed += OnAdClosed;
+
+        // Create an empty ad request.
+        AdRequest request = new AdRequest.Builder().Build();
+
+        // Load the ad with the request.
+        this.rewardedAd.LoadAd(request);
+
+    }
+
+    public void DestroyRewarded()
+    {
+        if (rewardedAd != null)
+        {
+            rewardedAd.Destroy();
+            this.rewardedAd.OnAdLoaded -= HandleRewardedAdLoaded;
+            // Called when the user should be rewarded for interacting with the ad.
+            this.rewardedAd.OnUserEarnedReward -= HandleUserEarnedReward;
+        }
+    }
+
+    public void HandleRewardedAdLoaded(object sender, EventArgs args)
+    {
+        this.rewardedAd.Show();
+    }
+
+    public void HandleUserEarnedReward(object sender, Reward args)
+    {
+        //        string type = args.Type;
+        //        double amount = args.Amount;
+        //        MonoBehaviour.print(
+        //            "HandleRewardedAdRewarded event received for "
+        //                        + amount.ToString() + " " + type);
+        GameManager.Instance.GameOverExtraLife();
+    }
+
+    public void OnAdClosed(object sender, EventArgs args)
+    {
+ //       GameManager.Instance.MoveToNextScene();
     }
 }
 

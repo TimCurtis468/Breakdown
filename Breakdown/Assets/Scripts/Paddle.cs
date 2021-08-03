@@ -50,6 +50,8 @@ public class Paddle : MonoBehaviour
     public GameObject rightMuzzle;
     public Projectile bulletPrefab;
 
+    public bool isActive;
+
 
     void Start()
     {
@@ -74,13 +76,18 @@ public class Paddle : MonoBehaviour
         SetClamps(true);
 
         Utilities.ResizeSprite(this.gameObject);
+
+        isActive = true;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        PaddleMovement();
-        UpdateMuzzlePosition();
+        if (isActive == true)
+        {
+            PaddleMovement();
+            UpdateMuzzlePosition();
+        }
     }
     private void UpdateMuzzlePosition()
     {
@@ -195,7 +202,7 @@ public class Paddle : MonoBehaviour
 
         //        Debug.Log("START SHOOTING");
 
-        while (shootingDurationLeft >= 0.0)
+        while ((shootingDurationLeft >= 0.0) && (PaddleIsShooting == true))
         {
             fireCooldownleft -= Time.deltaTime;
             shootingDurationLeft -= Time.deltaTime;
