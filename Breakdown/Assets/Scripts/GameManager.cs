@@ -140,6 +140,7 @@ public class GameManager : MonoBehaviour
     public void GameOverExtraLife()
     {
         this.Lives++;
+        nextAd += 2;
         gameOver.SetActive(false);
         AdManager.Instance.DestroyRewarded();
 

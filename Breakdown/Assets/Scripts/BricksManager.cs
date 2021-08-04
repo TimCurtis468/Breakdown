@@ -45,6 +45,7 @@ public class BricksManager : MonoBehaviour
 
     private List<Level> levels;
     public int levelNum = 0;
+    private bool allLevelsComplete = false;
 
     public int InitialBricksCount { get; set; }
 
@@ -55,20 +56,30 @@ public class BricksManager : MonoBehaviour
         LoadLevelsData();
         this.GenerateBricks();
         levelNum = 0;
+        allLevelsComplete = false;
     }
 
     public void LoadNextLevel()
     {
-        this.levelNum++;
-
-        if (this.levelNum >= this.levels.Count)
+        // Check if all levels have been completed
+        if (allLevelsComplete == false)
         {
-//            GameManager.Instance.ShowVictoryScreen();
+            // Move to next level
+            this.levelNum++;
         }
         else
         {
-            this.LoadLevel(this.levelNum);
+            // Pick a random level as all have been completed
+            this.levelNum = UnityEngine.Random.Range(0, this.levels.Count);
         }
+
+        // Check if all levels have been completed
+        if (this.levelNum >= this.levels.Count)
+        {
+            this.levelNum = UnityEngine.Random.Range(0, this.levels.Count);
+            allLevelsComplete = true;
+        }
+        this.LoadLevel(this.levelNum);
     }
 
     public void LoadLevel(int level)
