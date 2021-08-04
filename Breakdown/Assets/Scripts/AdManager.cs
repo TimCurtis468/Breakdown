@@ -36,6 +36,8 @@ public class AdManager : MonoBehaviour
     private RewardedAd rewardedAd;
 
     private bool interAdClosed = true;
+    public bool rewardGiven = false;
+    public bool rewardedAdClosed = false;
 
     private string bannerAdId = "ca-app-pub-3940256099942544/6300978111";
     private string interstitialAdId = "ca-app-pub-3940256099942544/1033173712";
@@ -44,6 +46,8 @@ public class AdManager : MonoBehaviour
     public void Start()
     {
         interAdClosed = true;
+        rewardGiven = false;
+        rewardedAdClosed = false;
     }
 
     /**********
@@ -92,10 +96,13 @@ public class AdManager : MonoBehaviour
     public void HandleOnInterstitialAdLoaded(object sender, EventArgs args)
     {
         this.interstitial.Show();
+        MusicManager.Instance.PauseMusic();
+
     }
     public void HandleOnInterstitialAdClosed(object sender, EventArgs args)
     {
         interAdClosed = true;
+        MusicManager.Instance.UnPauseMusic();
     }
 
     public bool isInterstialClosed()
@@ -120,19 +127,21 @@ public class AdManager : MonoBehaviour
         // Rewarded ad
         this.rewardedAd = new RewardedAd(rewardedAdId);
 
-
         // Called when an ad request has successfully loaded.
         this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
         // Called when the user should be rewarded for interacting with the ad.
         this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
-        this.rewardedAd.OnAdClosed += OnAdClosed;
+        this.rewardedAd.OnAdClosed += OnRewardedAdClosed;
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
 
         // Load the ad with the request.
         this.rewardedAd.LoadAd(request);
+        SoundFxManager.Instance.PlayHeart();
 
+        rewardGiven = false;
+        rewardedAdClosed = false;
     }
 
     public void DestroyRewarded()
@@ -143,12 +152,18 @@ public class AdManager : MonoBehaviour
             this.rewardedAd.OnAdLoaded -= HandleRewardedAdLoaded;
             // Called when the user should be rewarded for interacting with the ad.
             this.rewardedAd.OnUserEarnedReward -= HandleUserEarnedReward;
+            this.rewardedAd.OnAdClosed -= OnRewardedAdClosed;
         }
+    }
+
+    public void ShowRewardedAd()
+    {
+        this.rewardedAd.Show();
     }
 
     public void HandleRewardedAdLoaded(object sender, EventArgs args)
     {
-        this.rewardedAd.Show();
+//        this.rewardedAd.Show();
     }
 
     public void HandleUserEarnedReward(object sender, Reward args)
@@ -158,8 +173,15 @@ public class AdManager : MonoBehaviour
         //        MonoBehaviour.print(
         //            "HandleRewardedAdRewarded event received for "
         //                        + amount.ToString() + " " + type);
-        GameManager.Instance.GameOverExtraLife();
+        //       GameManager.Instance.GameOverExtraLife();
+        rewardGiven = true;
     }
+
+    public void OnRewardedAdClosed(object sender, EventArgs args)
+    {
+        rewardedAdClosed = true;
+    }
+
 
     public void OnAdClosed(object sender, EventArgs args)
     {

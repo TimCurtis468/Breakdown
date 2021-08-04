@@ -6717,7 +6717,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1489425702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.405, y: 0.489, z: 0}
+  m_LocalPosition: {x: 0.39, y: 0.489, z: 0}
   m_LocalScale: {x: 0.2, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1770376675}
@@ -6771,13 +6771,13 @@ MonoBehaviour:
   - {fileID: 5942664546718290914, guid: e33c159ec5bdc424783b5d2f59a8fbb4, type: 3}
   - {fileID: 5942664546718290914, guid: e33c159ec5bdc424783b5d2f59a8fbb4, type: 3}
   - {fileID: -3899046538180569956, guid: 78da450be76e8a9478e91b9770c4a5b1, type: 3}
-  - {fileID: 21330138112431332, guid: 0de67096e36294442a61c45f50638ac5, type: 3}
+  - {fileID: -3899046538180569956, guid: 78da450be76e8a9478e91b9770c4a5b1, type: 3}
   - {fileID: 7208043558402213575, guid: b05d2795b5702af419f8767778bba074, type: 3}
   - {fileID: 2564390857557197698, guid: 2f69d0829698ce9419e478f43b64d6c2, type: 3}
-  - {fileID: -3899046538180569956, guid: 78da450be76e8a9478e91b9770c4a5b1, type: 3}
+  - {fileID: 21330138112431332, guid: 0de67096e36294442a61c45f50638ac5, type: 3}
   AvailableDebuffs:
   - {fileID: 7944776267892804978, guid: 2f66c95c84430794e84d11f5e50e6a17, type: 3}
-  BuffChance: 3.8
+  BuffChance: 5
   DebuffChance: 2
 --- !u!1 &1674883753
 GameObject:
@@ -12476,7 +12476,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035230958}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.591, y: 0.457, z: 0}
+  m_LocalPosition: {x: -0.605, y: 0.457, z: 0}
   m_LocalScale: {x: 0.2, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1770376675}

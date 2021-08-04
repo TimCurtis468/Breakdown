@@ -66,6 +66,18 @@ public class MusicManager : MonoBehaviour
         isPlaying = false;
     }
 
+    public void PauseMusic()
+    {
+        audioSource.Pause();
+        isPlaying = false;
+    }
+
+    public void UnPauseMusic()
+    {
+        audioSource.UnPause();
+        isPlaying = false;
+    }
+
     public void StartMusic()
     {
         isPlaying = true;

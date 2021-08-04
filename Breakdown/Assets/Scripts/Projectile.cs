@@ -6,6 +6,10 @@ public class Projectile : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if ((collision.gameObject.name != "LeftWall") &&
+            (collision.gameObject.name != "RightWall"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

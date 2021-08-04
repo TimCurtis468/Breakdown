@@ -237,11 +237,11 @@ PlayerSettings:
   useCustomBaseGradleTemplate: 0
   useCustomGradlePropertiesTemplate: 0
   useCustomProguardFile: 0
-  AndroidTargetArchitectures: 1
+  AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 1
   androidSplashScreen: {fileID: 2800000, guid: b87a0e160b9f1ba45905ae47750e8b4d, type: 3}
-  AndroidKeystoreName: C:/Users/tim_r/.android/debug.keystore
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: '{inproject}: Assets/Keystore/user.keystore'
+  AndroidKeyaliasName: myalias
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
@@ -667,7 +667,8 @@ PlayerSettings:
   scriptingDefineSymbols: {}
   additionalCompilerArguments: {}
   platformArchitecture: {}
-  scriptingBackend: {}
+  scriptingBackend:
+    Android: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

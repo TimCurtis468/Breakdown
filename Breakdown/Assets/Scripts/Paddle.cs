@@ -91,8 +91,8 @@ public class Paddle : MonoBehaviour
     }
     private void UpdateMuzzlePosition()
     {
-        leftMuzzle.transform.position = new Vector3(this.transform.position.x - (this.sr.size.x / 2) + 0.1f, this.transform.position.y + 0.4f, this.transform.position.z);
-        rightMuzzle.transform.position = new Vector3(this.transform.position.x + (this.sr.size.x / 2) - 0.153f, this.transform.position.y + 0.4f, this.transform.position.z);
+        leftMuzzle.transform.position = new Vector3(this.transform.position.x - (this.sr.size.x / 2) + 0.2f, this.transform.position.y + 0.4f, this.transform.position.z);
+        rightMuzzle.transform.position = new Vector3(this.transform.position.x + (this.sr.size.x / 2) - 0.253f, this.transform.position.y + 0.4f, this.transform.position.z);
     }
 
     private void SetClamps(bool init)

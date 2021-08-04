@@ -80,6 +80,23 @@ public class GameManager : MonoBehaviour
         nextAd = 4;
     }
 
+    public void Update()
+    {
+        if (AdManager.Instance.rewardedAdClosed == true)
+        {
+            if (AdManager.Instance.rewardGiven == true)
+            {
+                this.GameOverExtraLife();
+            }
+            else
+            {
+                this.MoveToGameOver();
+            }
+            AdManager.Instance.rewardGiven = false;
+            AdManager.Instance.rewardedAdClosed = false;
+        }
+    }
+
     public void SetScore(int score)
     {
         endScore = score;
@@ -114,8 +131,10 @@ public class GameManager : MonoBehaviour
             if (this.Lives < 1)
             {
                 BallsManager.Instance.DestroyBalls();
+                AdManager.Instance.RequestRewarded();
 
-                if(gameOver != null)
+
+                if (gameOver != null)
                 {
                     gameOver.SetActive(true);
                     Paddle.Instance.isActive = false;
@@ -134,7 +153,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOverWatchVid()
     {
-        AdManager.Instance.RequestRewarded();
+        AdManager.Instance.ShowRewardedAd();
     }
 
     public void GameOverExtraLife()
@@ -151,7 +170,7 @@ public class GameManager : MonoBehaviour
         MusicManager.Instance.StartMusic();
     }
 
-    public void MoveToNextScene()
+    public void MoveToGameOver()
     {
         gameOver.SetActive(false);
         AdManager.Instance.DestroyRewarded();

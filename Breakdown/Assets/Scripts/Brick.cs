@@ -49,7 +49,11 @@ public class Brick : MonoBehaviour
             instantKill = ball.isLightningBall;
         }
 
-        if ((collision.collider.tag == "Ball") || (collision.collider.tag == "Projectile"))
+        if (collision.collider.tag == "Ball") 
+        {
+            TakeDamage(instantKill);
+        }
+        if (collision.collider.tag == "Projectile")
         {
             TakeDamage(instantKill);
         }
@@ -65,7 +69,11 @@ public class Brick : MonoBehaviour
             instantKill = ball.isLightningBall;
         }
 
-        if ((collision.gameObject.tag == "Ball") || (collision.gameObject.tag == "Projectile"))
+        if (collision.gameObject.tag == "Ball") 
+        {
+            TakeDamage(instantKill);
+        }
+        if (collision.gameObject.tag == "Projectile")
         {
             TakeDamage(instantKill);
         }
