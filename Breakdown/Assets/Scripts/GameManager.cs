@@ -47,6 +47,8 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     private int nextAd = 4;
 
+    private int numResurrections = 0;
+
     private void Start()
     {
         GameObject obj;
@@ -74,10 +76,13 @@ public class GameManager : MonoBehaviour
 
         AdManager.Instance.RequestBanner(GoogleMobileAds.Api.AdPosition.Top);
 
+        AdManager.Instance.RequestRewarded();
+
         paused = false;
 
         level = 1;
         nextAd = 4;
+        numResurrections = 0;
     }
 
     public void Update()
@@ -131,15 +136,21 @@ public class GameManager : MonoBehaviour
             if (this.Lives < 1)
             {
                 BallsManager.Instance.DestroyBalls();
-                AdManager.Instance.RequestRewarded();
-
-
-                if (gameOver != null)
+                /* Check how many times player has been resurrected and die forever if too many */
+                if (numResurrections < 2)
                 {
-                    gameOver.SetActive(true);
-                    Paddle.Instance.isActive = false;
-                    Paddle.Instance.PaddleIsShooting = false;
-                    MusicManager.Instance.StopMusic();
+                    /* Show buttons to select resurrection or death */
+                    if (gameOver != null)
+                    {
+                        gameOver.SetActive(true);
+                        Paddle.Instance.isActive = false;
+                        Paddle.Instance.PaddleIsShooting = false;
+                        MusicManager.Instance.StopMusic();
+                    }
+                }
+                else
+                {
+                    MoveToGameOver();
                 }
             }
             else
@@ -160,6 +171,7 @@ public class GameManager : MonoBehaviour
     {
         this.Lives++;
         nextAd += 2;
+        numResurrections++;
         gameOver.SetActive(false);
         AdManager.Instance.DestroyRewarded();
 
@@ -168,6 +180,8 @@ public class GameManager : MonoBehaviour
         IsGameStarted = false;
         Paddle.Instance.isActive = true;
         MusicManager.Instance.StartMusic();
+        AdManager.Instance.RequestRewarded();
+
     }
 
     public void MoveToGameOver()
