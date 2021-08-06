@@ -6778,7 +6778,7 @@ MonoBehaviour:
   AvailableDebuffs:
   - {fileID: 7944776267892804978, guid: 2f66c95c84430794e84d11f5e50e6a17, type: 3}
   BuffChance: 5
-  DebuffChance: 2
+  DebuffChance: 1
 --- !u!1 &1674883753
 GameObject:
   m_ObjectHideFlags: 0

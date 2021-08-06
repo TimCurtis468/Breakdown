@@ -95,6 +95,7 @@ public class Ball : MonoBehaviour
             StartCoroutine(StopLightningBallAfterTime(this.lightningBallDuration));
 
             OnLightningBallEnable?.Invoke(this);
+            GameManager.Instance.buffActive = true;
 
         }
     }
@@ -115,6 +116,7 @@ public class Ball : MonoBehaviour
             lightningBallEffect.gameObject.SetActive(false);
 
             OnLightningBallDisable?.Invoke(this);
+            GameManager.Instance.buffActive = false;
         }
     }
 }

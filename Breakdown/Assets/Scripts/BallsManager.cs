@@ -32,6 +32,8 @@ public class BallsManager : MonoBehaviour
 
     public int numBalls = 1;
 
+    private bool mouseButtonLatch = false;
+
     public List<Ball> Balls { get; set; }
     public List<Rigidbody2D> BallRbs { get; set; }
 
@@ -40,6 +42,7 @@ public class BallsManager : MonoBehaviour
         Balls = new List<Ball>();
         BallRbs = new List<Rigidbody2D>();
         InitBall();
+        mouseButtonLatch = false;
     }
 
     private void Update()
@@ -50,13 +53,25 @@ public class BallsManager : MonoBehaviour
             Vector3 ballPosition = new Vector3(paddlePosition.x - 0.046f, paddlePosition.y + 0.27f, 0);
             Balls[0].transform.position = ballPosition;
 
-            if ((Input.GetMouseButtonDown(0)) && (AdManager.Instance.isInterstialClosed() == true))
+            // Has mouse button been pressed down?
+            if(Input.GetMouseButtonDown(0) == true)
             {
-                float y_speed = UnityEngine.Random.Range(250.0f, 350.0f);
+                mouseButtonLatch = true;
+            }
 
-                BallRbs[0].isKinematic = false;
-                BallRbs[0].AddForce(new Vector2(0, y_speed));
-                GameManager.Instance.IsGameStarted = true;
+            // Mas mouse button been released
+            if (mouseButtonLatch == true)
+            {
+                if ((Input.GetMouseButtonUp(0) == true) &&
+                   (AdManager.Instance.isInterstialClosed() == true))
+                {
+                    float y_speed = UnityEngine.Random.Range(250.0f, 350.0f);
+
+                    BallRbs[0].isKinematic = false;
+                    BallRbs[0].AddForce(new Vector2(0, y_speed));
+                    GameManager.Instance.IsGameStarted = true;
+                    mouseButtonLatch = false;
+                }
             }
         }
     }

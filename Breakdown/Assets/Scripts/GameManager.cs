@@ -49,6 +49,8 @@ public class GameManager : MonoBehaviour
 
     private int numResurrections = 0;
 
+    public bool buffActive = false;
+
     private void Start()
     {
         GameObject obj;
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
         level = 1;
         nextAd = 4;
         numResurrections = 0;
+        buffActive = false;
     }
 
     public void Update()

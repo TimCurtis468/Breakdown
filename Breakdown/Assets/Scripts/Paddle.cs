@@ -189,6 +189,7 @@ public class Paddle : MonoBehaviour
         {
             this.PaddleIsShooting = true;
             StartCoroutine(StartShootingRoutine());
+            GameManager.Instance.buffActive = true;
         }
     }
 
@@ -221,6 +222,7 @@ public class Paddle : MonoBehaviour
         this.PaddleIsShooting = false;
         leftMuzzle.SetActive(false);
         rightMuzzle.SetActive(false);
+        GameManager.Instance.buffActive = false;
     }
 
     private void Shoot()
