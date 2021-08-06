@@ -138,7 +138,6 @@ public class AdManager : MonoBehaviour
 
         // Load the ad with the request.
         this.rewardedAd.LoadAd(request);
-        SoundFxManager.Instance.PlayHeart();
 
         rewardGiven = false;
         rewardedAdClosed = false;

@@ -54,7 +54,7 @@ public class BallsManager : MonoBehaviour
             Balls[0].transform.position = ballPosition;
 
             // Has mouse button been pressed down?
-            if(Input.GetMouseButtonDown(0) == true)
+            if(Input.GetMouseButtonUp(0) == true)
             {
                 mouseButtonLatch = true;
             }
@@ -62,7 +62,7 @@ public class BallsManager : MonoBehaviour
             // Mas mouse button been released
             if (mouseButtonLatch == true)
             {
-                if ((Input.GetMouseButtonUp(0) == true) &&
+                if ((Input.GetMouseButtonDown(0) == true) &&
                    (AdManager.Instance.isInterstialClosed() == true))
                 {
                     float y_speed = UnityEngine.Random.Range(250.0f, 350.0f);
