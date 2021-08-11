@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
     private int endScore = 0;
 
     private int level = 1;
-    private int nextAd = 4;
+    private int nextAd = 2;
 
     private int numResurrections = 0;
 
