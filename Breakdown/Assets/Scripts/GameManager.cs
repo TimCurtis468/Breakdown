@@ -92,7 +92,7 @@ public class GameManager : MonoBehaviour
     {
         if (AdManager.Instance.rewardedAdClosed == true)
         {
-            if (AdManager.Instance.rewardGiven == true)
+            if ((AdManager.Instance.rewardGiven == true) && (AdManager.Instance.rewardedAdFailed == false))
             {
                 this.GameOverExtraLife();
             }
@@ -102,6 +102,11 @@ public class GameManager : MonoBehaviour
             }
             AdManager.Instance.rewardGiven = false;
             AdManager.Instance.rewardedAdClosed = false;
+        }
+        else if (AdManager.Instance.rewardedAdFailed == true)
+        {
+            AdManager.Instance.rewardedAdFailed = false;
+            this.MoveToGameOver();
         }
     }
 

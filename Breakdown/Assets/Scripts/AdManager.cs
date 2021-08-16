@@ -38,6 +38,7 @@ public class AdManager : MonoBehaviour
     private bool interAdClosed = true;
     public bool rewardGiven = false;
     public bool rewardedAdClosed = false;
+    public bool rewardedAdFailed = false;
 
     private string bannerAdId = "ca-app-pub-3940256099942544/6300978111";
     private string interstitialAdId = "ca-app-pub-3940256099942544/1033173712";
@@ -48,6 +49,7 @@ public class AdManager : MonoBehaviour
         interAdClosed = true;
         rewardGiven = false;
         rewardedAdClosed = false;
+        rewardedAdFailed = false;
     }
 
     /**********
@@ -127,11 +129,10 @@ public class AdManager : MonoBehaviour
         // Rewarded ad
         this.rewardedAd = new RewardedAd(rewardedAdId);
 
-        // Called when an ad request has successfully loaded.
         this.rewardedAd.OnAdLoaded += HandleRewardedAdLoaded;
-        // Called when the user should be rewarded for interacting with the ad.
         this.rewardedAd.OnUserEarnedReward += HandleUserEarnedReward;
         this.rewardedAd.OnAdClosed += OnRewardedAdClosed;
+        this.rewardedAd.OnAdFailedToLoad += HandleRewardedAdFailedToLoad;
 
         // Create an empty ad request.
         AdRequest request = new AdRequest.Builder().Build();
@@ -141,7 +142,10 @@ public class AdManager : MonoBehaviour
 
         rewardGiven = false;
         rewardedAdClosed = false;
+        rewardedAdFailed = false;
     }
+
+
 
     public void DestroyRewarded()
     {
@@ -149,9 +153,10 @@ public class AdManager : MonoBehaviour
         {
             rewardedAd.Destroy();
             this.rewardedAd.OnAdLoaded -= HandleRewardedAdLoaded;
-            // Called when the user should be rewarded for interacting with the ad.
             this.rewardedAd.OnUserEarnedReward -= HandleUserEarnedReward;
             this.rewardedAd.OnAdClosed -= OnRewardedAdClosed;
+            this.rewardedAd.OnAdFailedToLoad -= HandleRewardedAdFailedToLoad;
+
         }
     }
 
@@ -164,6 +169,11 @@ public class AdManager : MonoBehaviour
     {
 //        this.rewardedAd.Show();
     }
+    public void HandleRewardedAdFailedToLoad(object sender, AdFailedToLoadEventArgs args)
+    {
+        rewardedAdFailed = true;
+    }
+
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
