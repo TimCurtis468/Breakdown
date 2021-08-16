@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     private int numResurrections = 0;
 
     public bool buffActive = false;
+    public bool gameOverActive = false;
 
     private void Start()
     {
@@ -86,27 +87,34 @@ public class GameManager : MonoBehaviour
         nextAd = 4;
         numResurrections = 0;
         buffActive = false;
+
+        gameOverActive = false;
     }
 
     public void Update()
     {
-        if (AdManager.Instance.rewardedAdClosed == true)
+        if (gameOverActive == true)
         {
-            if ((AdManager.Instance.rewardGiven == true) && (AdManager.Instance.rewardedAdFailed == false))
+            if (AdManager.Instance.rewardedAdClosed == true)
             {
-                this.GameOverExtraLife();
+                if ((AdManager.Instance.rewardGiven == true) && (AdManager.Instance.rewardedAdFailed == false))
+                {
+                    this.GameOverExtraLife();
+                }
+                else
+                {
+                    this.MoveToGameOver();
+                }
+                AdManager.Instance.rewardGiven = false;
+                AdManager.Instance.rewardedAdClosed = false;
+                gameOverActive = false;
             }
-            else
+            else if (AdManager.Instance.rewardedAdFailed == true)
             {
+                AdManager.Instance.rewardedAdFailed = false;
                 this.MoveToGameOver();
+                gameOverActive = false;
             }
-            AdManager.Instance.rewardGiven = false;
-            AdManager.Instance.rewardedAdClosed = false;
-        }
-        else if (AdManager.Instance.rewardedAdFailed == true)
-        {
-            AdManager.Instance.rewardedAdFailed = false;
-            this.MoveToGameOver();
         }
     }
 
@@ -151,6 +159,7 @@ public class GameManager : MonoBehaviour
                     if (gameOver != null)
                     {
                         gameOver.SetActive(true);
+                        gameOverActive = true;
                         Paddle.Instance.isActive = false;
                         Paddle.Instance.PaddleIsShooting = false;
                         MusicManager.Instance.StopMusic();

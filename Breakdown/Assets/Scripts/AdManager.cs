@@ -40,9 +40,15 @@ public class AdManager : MonoBehaviour
     public bool rewardedAdClosed = false;
     public bool rewardedAdFailed = false;
 
+#if (PI)
     private string bannerAdId = "ca-app-pub-3940256099942544/6300978111";
     private string interstitialAdId = "ca-app-pub-3940256099942544/1033173712";
     private string rewardedAdId = "ca-app-pub-3940256099942544/5224354917";
+#else
+    private string bannerAdId = "ca-app-pub-4187256387197374/6028382101";
+    private string interstitialAdId = "ca-app-pub-4187256387197374/8313417055";
+    private string rewardedAdId = "ca-app-pub-4187256387197374/1935904482";
+#endif
 
     public void Start()
     {
