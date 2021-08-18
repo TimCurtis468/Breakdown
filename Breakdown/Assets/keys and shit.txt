@@ -1,0 +1,9 @@
+ca-app-pub-4187256387197374~9612403899a
+
+Keystore alias:  key0
+
+keystore alias 
+
+"C:\Program Files\Java\jdk-13.0.1\bin\keytool.exe" -genkeypair -alias breakdown -keyalg RSA -keysize 2048 -validity 9125 -keystore user.keystore
+
+"C:\Program Files\Java\jdk-13.0.1\bin\keytool.exe" -export -rfc -keystore user.keystore -alias breakdown -file upload_certificate.pem
