@@ -156,7 +156,7 @@ public class Brick : MonoBehaviour
     private void SpawnDestroyEffect()
     {
         Vector3 brickPos = gameObject.transform.position;
-        Vector3 spawnPosition = new Vector3(brickPos.x, brickPos.y, brickPos.z - 0.2f);
+        Vector3 spawnPosition = new Vector3(brickPos.x, brickPos.y, brickPos.z + 0.2f);
         GameObject effect = Instantiate(DestroyEffect.gameObject, spawnPosition, Quaternion.identity);
 
         MainModule mm = effect.GetComponent<ParticleSystem>().main;

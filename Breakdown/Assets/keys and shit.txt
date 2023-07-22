@@ -4,6 +4,16 @@ Keystore alias:  key0
 
 keystore alias 
 
+
+keystore: user.keystore
+
+alias: breakdown
+
+password : usual password
+
+
 "C:\Program Files\Java\jdk-13.0.1\bin\keytool.exe" -genkeypair -alias breakdown -keyalg RSA -keysize 2048 -validity 9125 -keystore user.keystore
 
 "C:\Program Files\Java\jdk-13.0.1\bin\keytool.exe" -export -rfc -keystore user.keystore -alias breakdown -file upload_certificate.pem
+
+"C:\Program Files\Java\jdk-13.0.1\bin\keytool.exe" -v -list -keystore user.keystore

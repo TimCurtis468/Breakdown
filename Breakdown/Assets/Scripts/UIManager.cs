@@ -46,7 +46,7 @@ public class UIManager : MonoBehaviour
 
     private void OnLevelComplete()
     {
-         if (backgrounds.Length > 0)
+        if (backgrounds.Length > 0)
         {
             int background_num = UnityEngine.Random.Range(0, backgrounds.Length);
             spriteRenderer.sprite = backgrounds[background_num];
